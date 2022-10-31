@@ -250,81 +250,15 @@ Para la simulación, suponiendo ![n
 = 20](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%3D%2020
 "n = 20"), entonces
 
-``` r
-n <- 20
-
-# Funcion de eleccion de X
-X <- function(u, n) {
-    for (i in 1:(n-1)) {
-        if (u <= i/n) return(paste("x_", sprintf("%.2d", i), sep=""))
-    }
-    return(paste("x_", n, sep=""))
-}
-
-# Usando la variable auxiliar u ~ Unif(0,1)
-sim <- tibble(u=runif(10000, 0, 1)) %>%
-    mutate(X=sapply(u, X, n)) %>%
-    select(-u) %>% 
-    count(X) %>%
-    arrange(stringr::str_extract(X, '\\d+$'))
-
-ggplot(sim, aes(x=X, y=n))+
-    geom_bar(stat="identity", fill="deepskyblue3") +
-    theme_light() + 
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, 500, length.out=5), 
-        labels=seq(0, 500, length.out=5), 
-        limits=c(0, max(sim$n) + 70), expand=c(0, 10)) + 
-    xlab("") +
-    theme(panel.grid.major=element_blank(),
-        axis.text.x=element_text(angle=45, vjust=-.0001)) +
-    annotate("text", x=16, y=570, label=latex2exp::TeX("$unif{\\{x_n\\}}_{n=1}^{20}$"), size=5)
-```
-
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-4-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-4-1.png" style="display: block; margin: auto;" />
 
 5.  Correr en `R` la simulación 3.1 y hacer un histograma.
 
-<!-- end list -->
-
-``` r
-# 15 valores al azar de la distribucion unif{1, . . . , 10}
-sim_3.1 <- tibble(sample=sample(1:10L, 15, replace=TRUE))  %>% 
-    count(sample)
-
-ggplot(sim_3.1, aes(x=sample, y=n)) +
-    geom_bar(fill="deepskyblue3", stat="identity") +
-    theme_light() +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim U\\{1,\\ldots, 10\\}$"), 
-        breaks=1:10, labels=1:10, limits=c(1, 10)) + 
-    ylab("Frecuencia") +
-    theme(panel.grid.major=element_blank())
-```
-
-    ## Warning: Removed 2 rows containing missing values (geom_bar).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/sim-5-1-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/sim-5-1-1.png" style="display: block; margin: auto;" />
 
 Al considerar una muestra de mayor tamaño:
 
-``` r
-# 15 valores al azar de la distribucion unif{1, . . . , 10}
-sim_3.1 <- tibble(sample=sample(1:10L, 10000L, replace=TRUE)) %>% 
-    count(sample)
-
-ggplot(sim_3.1, aes(x=sample, y=n)) +
-    geom_bar(fill="deepskyblue3", stat="identity") +
-    theme_light() +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim U\\{1,\\ldots, 10\\}$"), 
-        breaks=1:10, labels=1:10, limits=c(0, 11)) + 
-    ylab("Frecuencia") +
-    theme(panel.grid.major=element_blank())
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/sim-5-2-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/sim-5-2-1.png" style="display: block; margin: auto;" />
 
 6.  *(Problema 292)* Este es un mecanismo para generar valores al azar
     si ![t \<
@@ -382,35 +316,7 @@ y eso demuestra que ![X \\sim
 \\text{Ber}(p)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;X%20%5Csim%20%5Ctext%7BBer%7D%28p%29
 "X \\sim \\text{Ber}(p)").
 
-``` r
-# Probabilidad de exito
-p <- .7
-
-# Funcion de eleccion de X
-X <- function(u, p) {
-    if (u <= (1 - p)) return(0)
-    return(1)
-}
-
-# Usando la variable auxiliar u ~ Unif(0,1)
-sim <- tibble(u=runif(1000, 0, 1)) %>%
-    mutate(X=sapply(u, X, p)) %>%
-    select(-u) %>% 
-    count(X) %>%
-    arrange(X)
-
-ggplot(sim, aes(x=X, y=n))+
-    geom_bar(stat="identity", fill="deepskyblue3") +
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 50, by=100), 
-        labels=seq(0, max(sim$n) + 50, by=100)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim Ber(p=.7)$"), 
-        breaks=c(0,1), labels=c("Fracaso","Exito")) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank())
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-6-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-6-1.png" style="display: block; margin: auto;" />
 
 7.  Implemente la simulación 3.4 y genere una muestra aleatoria. Muestre
     el histograma. Coloque las leyendas.
@@ -424,35 +330,7 @@ de la distribución ![\\text{bin}(n,
 p)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Ctext%7Bbin%7D%28n%2C%20p%29
 "\\text{bin}(n, p)").
 
-``` r
-# El numero de ensayos y prob de exito
-n <- 20
-p <- .7
-
-# Se genera un valor al azar de una Binomial a partir de los 20 ensayos de Bernoulli
-bin_val <- sapply(1:1000L, function(x) sum(rbinom(n, 1, p))) %>%
-    as_tibble %>%
-    count(value) %>%
-    bind_rows(
-        tibble(
-            value=c(1:n)[!(1:n %in% .$value)], 
-            n=rep(0, sum(!(1:n %in% .$value)))
-        )
-    )
-
-ggplot(bin_val, aes(x=value, y=n))+
-    geom_bar(stat="identity", fill="deepskyblue3", width=.1) +
-    geom_point() + 
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(bin_val$n) + 100, by=50), 
-        labels=seq(0, max(bin_val$n) + 100, by=50), limits=c(0,200)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim Bin(n=20, p=.7)$"), 
-        breaks=0:n, labels=0:n) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank())
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-7-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-7-1.png" style="display: block; margin: auto;" />
 
 8.  Genere una muestra aleatoria con 3.6 y muestre el histograma. Un
     examen tiene diez preguntas y cada una tiene tres opciones como
@@ -461,35 +339,7 @@ ggplot(bin_val, aes(x=value, y=n))+
     de que apruebe el examen? Supponiendo que la nota mínima aprobatoria
     es 6.
 
-<!-- end list -->
-
-``` r
-p <- 1/3 # Prob de contestar correctamente
-n <- 10 # Numero de preguntas
-
-sim <- rbinom(1000, 10, 1/3) %>%
-    as_tibble %>%
-    count(value) %>%
-    bind_rows(
-        tibble(
-            value=c(1:n)[!(1:n %in% .$value)], 
-            n=rep(0, sum(!(1:n %in% .$value)))
-        )
-    )
-
-ggplot(sim, aes(x=value, y=n))+
-    geom_bar(stat="identity", fill="deepskyblue3", width=.1) +
-    geom_point() + 
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 50, by=50), 
-        labels=seq(0, max(sim$n) + 50, by=50), limits=c(0,300)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim Bin(n=10, p=1/3)$"), 
-        breaks=0:n, labels=0:n) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank())
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-8-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-8-1.png" style="display: block; margin: auto;" />
 
 La probabilidad de obtener la nota minima aprobatoria es ![P(X \\ge 6)
 = 1 - P(X \< 6) = 1 - \\sum\_{k=0}^5 P(X = k)
@@ -532,49 +382,7 @@ x](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;
 se demuestra que la función de distribución es de una variable aleatoria
 geométrica.
 
-``` r
-p <- .4 # Prob de contestar correctamente
-
-rDraw_geom <- function(p) {
-    x <- 0
-    repeat{
-        sim <- rbinom(1, 1, p)
-        if (sim == 1) {
-            break;
-        }
-        x <- x + 1
-    }
-    x
-}
-
-# Tomando un solo valor de la geometrica
-#rDraw_geom(p)
-
-# Simulacion de 1000 ensayos de una Geometrica
-sim <- sapply(1:1000, function(i, p) rDraw_geom(p), p) %>%
-    as_tibble %>%
-    count(value)  %>%
-    bind_rows(
-        tibble(
-            value=c(1:max(.$value))[!(1:max(.$value) %in% .$value)], 
-            n=rep(0, sum(!(1:max(.$value) %in% .$value)))
-        )
-    )
-
-ggplot(sim, aes(x=value, y=n))+
-    geom_bar(stat="identity", fill="deepskyblue3", width=.1) +
-    geom_point() + 
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 50, length.out=7), 
-        labels=round(seq(0, max(sim$n) + 50, length.out=7), 0), 
-        limits=c(0,max(sim$n) + 10)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim geom(p)$"), 
-        breaks=0:max(sim$value), labels=0:max(sim$value)) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank())
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-9-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-9-1.png" style="display: block; margin: auto;" />
 
 10. En Simulación 3.7, asigne valores a los parámetros de
     ![r](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;r
@@ -582,36 +390,7 @@ ggplot(sim, aes(x=value, y=n))+
     ![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p
     "p") y muestre los histogramas.
 
-<!-- end list -->
-
-``` r
-r <- list(5, 10, 50, 100)
-p <- list(.3, .2, .3, .5)
-
-sim <- map2(r, p, rnbinom, n = 500) %>% 
-    setNames(nm=paste("Simulación", 1:4)) %>%
-    bind_rows(.id="dist") %>%
-    tidyr::gather(key="Sim", value="value") %>%
-    count(Sim, value)
-
-ggplot(sim, aes(x=value, y=n, fill=Sim))+
-    geom_bar(stat="identity", width=1, position="dodge") +
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 5, length.out=7), 
-        labels=round(seq(0, max(sim$n) + 5, length.out=7), 0), 
-        limits=c(0,max(sim$n) + 10)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim NegBin(r, p)$"), 
-        breaks=seq(0, max(sim$value), length.out=10), 
-        labels=round(seq(0, max(sim$value), length.out=10),0)) + 
-    scale_fill_manual(name="", 
-        values=c("gray20", "deepskyblue4", "deepskyblue3", "deepskyblue1"),
-        labels=c("r = 5, p = .3", "r = 10, p = .2", "r = 50, p = .3", "r = 100, p = .5")) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(),
-        legend.position=c(.7,.8))
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-10-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-10-1.png" style="display: block; margin: auto;" />
 
 11. *(Problema 328)* Sea ![X\_1, X\_2,
     \\ldots](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;X_1%2C%20X_2%2C%20%5Cldots
@@ -650,51 +429,7 @@ abilidad por el ![\\binom{x + r
 "\\binom{x + r - 1}{x}"); y se demuestra que la distribución es Binomial
 Negativa. Implemente en `R`.
 
-``` r
-r <- 3 # Numnero de exitos
-p <- .4 # Prob de contestar correctamente
-
-rDraw_BinNeg <- function(r, p) {
-    x <- 0
-    success <- 0
-    repeat{
-        sim <- rbinom(1, 1, p)
-        if (success == r) {
-            break;
-        }
-        if (sim == 0 ) x <- x + 1 else success <- success + 1
-    }
-    x
-}
-
-# Tomando un solo valor de la bin neg
-#rDraw_BinNeg(r,p)
-
-# Simulacion de 1000 ensayos de una bin neg
-sim <- sapply(1:1000, function(i, r, p) rDraw_BinNeg(r, p), r, p) %>%
-    as_tibble %>%
-    count(value) %>%
-    bind_rows(
-        tibble(
-            value=c(1:max(.$value))[!(1:max(.$value) %in% .$value)], 
-            n=rep(0, sum(!(1:max(.$value) %in% .$value)))
-        )
-    )
-
-ggplot(sim, aes(x=value, y=n))+
-    geom_bar(stat="identity", fill="deepskyblue3", width=.1) +
-    geom_point() + 
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 50, length.out=7), 
-        labels=round(seq(0, max(sim$n) + 50, length.out=7), 0), 
-        limits=c(0,max(sim$n) + 10)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim NegBin(r = 3, p = .4)$"), 
-        breaks=0:max(sim$value), labels=0:max(sim$value)) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank())
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-11-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-11-1.png" style="display: block; margin: auto;" />
 
 12. Simulación 3.8. Asigne usted valores a los parámetros
     ![N](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;N
@@ -707,38 +442,7 @@ ggplot(sim, aes(x=value, y=n))+
     ![K](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;K
     "K"). Muestre el histograma.
 
-<!-- end list -->
-
-``` r
-N <- 100
-n <- 15
-K <- list(45, 60)
-N_K <- map(K, function(x, N) N - x, N)
-
-sim <- map2(K, N_K, rhyper, nn = 1000, n=n) %>% 
-    setNames(nm=paste("Simulación", 1:2)) %>%
-    bind_rows(.id="dist") %>%
-    tidyr::gather(key="Sim", value="value") %>%
-    count(Sim, value)
-
-ggplot(sim, aes(x=value, y=n))+
-    geom_bar(aes(fill=Sim),stat="identity", width=.1, position="dodge") +
-    geom_point() +
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 5, length.out=7), 
-        labels=round(seq(0, max(sim$n) + 5, length.out=7), 0), 
-        limits=c(0,max(sim$n) + 10)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim hypergeo(n, K, N)$"), 
-        breaks=seq(0, max(sim$value), length.out=10), 
-        labels=round(seq(0, max(sim$value), length.out=10),0)) + 
-    scale_fill_manual(name="", values=c(5:2, 5,6),
-        labels=c("n = 15, K = 45, N = 100", "n = 15, K = 60, N = 100")) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(),
-        legend.position=c(.3,.8))
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-12-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-12-1.png" style="display: block; margin: auto;" />
 
 13. Simulación 3.9. Especificando un valor para
     ![\\lambda](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda
@@ -750,64 +454,18 @@ ggplot(sim, aes(x=value, y=n))+
     ![\\lambda](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Clambda
     "\\lambda"). ¿Son parecidos? Muestre los histogramas.
 
-<!-- end list -->
-
-``` r
-lambda <- list(.5, 5, 25, 100)
-
-sim <- map(lambda, rpois, n=1000)
-mean <- map(sim, function(x) as.numeric(mean(x)))
-
-sim <- sim %>% setNames(nm=paste("Simulación", 1:4)) %>%
-    bind_rows(.id="dist") %>%
-    tidyr::gather(key="Sim", value="value") %>%
-    count(Sim, value)
-
-ggplot(sim, aes(x=value, y=n)) +
-    geom_bar(aes(fill=Sim),stat="identity", width=.7, position="dodge") +
-    scale_y_continuous(name="Frecuencia", 
-        breaks=seq(0, max(sim$n) + 5, length.out=7), 
-        labels=round(seq(0, max(sim$n) + 5, length.out=7), 0), 
-        limits=c(0,max(sim$n) + 10)) +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim Poisson(\\lambda)$"), 
-        breaks=seq(0, max(sim$value), length.out=10), 
-        labels=round(seq(0, max(sim$value), length.out=10),0)) + 
-    scale_fill_manual(name="", 
-        values=c("gray20", "deepskyblue4", "deepskyblue3", "deepskyblue1"),
-        labels=c(latex2exp::TeX("$\\lambda = .5$"), latex2exp::TeX("$\\lambda = 5$.0"), latex2exp::TeX("$\\lambda = 25$"), latex2exp::TeX("$\\lambda = 50$"))) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(),
-        legend.position=c(.3,.8))
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-13-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-13-1.png" style="display: block; margin: auto;" />
 
 Los valores teóricos y los promedios calculados se muestran en la
 siguiente tabla, donde se muestra que los valores calculados a partir de
 los datos simulados y los teoricos es minima:
 
-``` r
-# Some flatten shit here to make list a tibble
-bind_cols(flatten_dbl(lambda), flatten_dbl(mean)) %>%
-    setNames(nm=c("Teorico", "Calculado")) %>%
-    mutate(Diferencia=Teorico - Calculado) %>%
-    knitr::kable(digits=4)
-```
-
-    ## New names:
-    ## • `` -> `...1`
-    ## • `` -> `...2`
-    
-    Teorico   Calculado   Diferencia
-
------
-
-``` 
-    0.5       0.473        0.027
-    5.0       5.002       -0.002
-   25.0      25.012       -0.012
-  100.0     100.485       -0.485
-```
+| Teorico | Calculado | Diferencia |
+| ------: | --------: | ---------: |
+|     0.5 |     0.473 |      0.027 |
+|     5.0 |     5.002 |    \-0.002 |
+|    25.0 |    25.012 |    \-0.012 |
+|   100.0 |   100.485 |    \-0.485 |
 
 14. Simulación 3.10 Asigne valores de su preferencia a los parámetros
     ![a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a
@@ -816,29 +474,7 @@ bind_cols(flatten_dbl(lambda), flatten_dbl(mean)) %>%
     "b"), y genere valores al azar de esta distribución. Genere el
     histograma.
 
-<!-- end list -->
-
-``` r
-sim <- tibble(u=runif(1000, 0, 1)) %>%
-    mutate(f_u=1) %>%
-    arrange(u)
-
-ggplot(sim, aes(x=f_u)) +
-    geom_bar(fill="deepskyblue3", width=.05) +
-    theme_light() + 
-    scale_y_continuous(name=latex2exp::TeX("$f(u)$"), 
-        breaks=seq(0, 1000, length.out=5), 
-        labels=seq(0, 1000, length.out=5), 
-        limits=c(-.1, 1050)) +
-    xlab(latex2exp::TeX("$u \\sim unif(a=0,b=1)$")) + 
-    theme(panel.grid.major=element_blank()) #+
-```
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-14-1.png)<!-- -->
-
-``` r
-    #annotate("text", x=0.975, y=1020, label=latex2exp::TeX("$f(u) = 1$"), size=5)
-```
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-14-1.png" style="display: block; margin: auto;" />
 
 15. *(Problema 359)* Sea
     ![X](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;X
@@ -955,31 +591,7 @@ Para la varianza, se pueden usar los resultados anteriores:
     "\\lambda") y genere valores al azar de la distribución exponencial.
     Genere el histograma.
 
-<!-- end list -->
-
-``` r
-lambda <- 5
-
-sim <- rexp(lambda, n=1000)
-
-ggplot(tibble(sim), aes(x=sim)) +
-    geom_histogram(fill="deepskyblue3") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim exp(\\lambda = 5)$"), 
-        breaks=seq(0, max(sim), length.out=10), 
-        labels=round(seq(0, max(sim), length.out=10),4)) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank()) +
-    annotate("text", x=0.75, y=100, 
-        label=latex2exp::TeX("$f(x) =\\lambda exp(-\\lambda x)$"), size=5)
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-17-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-17-1.png" style="display: block; margin: auto;" />
 
 18. *(Problema 375)* Sea
     ![X](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;X
@@ -1085,32 +697,7 @@ x}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space
 "f_X(x) = \\lambda e^{-\\lambda x}"), la cual es la función de
 probabilidad de la distribución exponencial.
 
-``` r
-lambda <- 5
-val_u <- runif(1000, 0, 1)
-
-val_x <- -(1 / lambda) * log(1 - val_u)
-
-bind_rows("A partir de U(0, 1)"=tibble(val_x), "Exponencial"=tibble(val_x=sim), .id="Simulación") %>%
-    ggplot(aes(x=val_x, fill=`Simulación`)) +
-      geom_histogram(position="dodge") +
-      scale_y_continuous(name="Frecuencia") +
-      scale_x_continuous(name=latex2exp::TeX("$X\\sim exp(\\lambda = 5)$"), 
-        breaks=seq(0, max(val_x), length.out=10), 
-        labels=round(seq(0, max(val_x), length.out=10), 3)) +
-      scale_fill_manual(values=c("deepskyblue1", "deepskyblue3")) +
-      theme_light() + 
-      theme(panel.grid.major=element_blank(), legend.position=c(.7, .6)) +
-      annotate("text", x=1, y=175, 
-        label=latex2exp::TeX("$f(x) =\\lambda exp(-\\lambda x)$"), size=5)
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-20-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-20-1.png" style="display: block; margin: auto;" />
 
 21. Simulación 3.12. Asigne un valor de su preferencia a los parámetros
     ![\\alpha](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Calpha
@@ -1119,30 +706,7 @@ bind_rows("A partir de U(0, 1)"=tibble(val_x), "Exponencial"=tibble(val_x=sim), 
     "\\lambda") y genere valores al azar de esta distribución. Genere
     los histogramas.
 
-<!-- end list -->
-
-``` r
-sim <- rgamma(1000,shape=7,rate=3)
-
-ggplot(tibble(sim), aes(x=sim)) +
-    geom_histogram(fill="deepskyblue3") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim$ Gamma($\\alpha = 7, \\lambda = 3$)"), 
-        breaks=seq(0, max(sim), length.out=10), 
-        labels=round(seq(0, max(sim), length.out=10),4)) + 
-    theme_light() + 
-    theme(panel.grid.major=element_blank()) +
-    annotate("text", x=5, y=75, 
-        label=latex2exp::TeX("$f(x) =\\frac{(\\lambda x)^{\\alpha - 1}}{\\Gamma(\\alpha)}\\lambda exp(-\\lambda x)$"),
-        size=5)
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-21-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-21-1.png" style="display: block; margin: auto;" />
 
 22. *(Problema 398)* **Propiedades de la función beta**. Demuestre las
     siguientes propiedades de la función beta.
@@ -1268,37 +832,7 @@ x)^\\alpha}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_wh
 
 la cual es la función de probabilidad de la distribución Weibull.
 
-``` r
-lambda <- 2
-alpha <- 2
-
-data <- tibble(u_val=runif(1000, 0, 1)) %>%
-    mutate( 
-        "A partir de U(0, 1)"=(1 / lambda) * ((-log(1 - u_val)) ** (1 / alpha)),
-        "Weibull"=rweibull(1000, alpha, 1/lambda)) %>%
-    select(-u_val) %>%
-    tidyr::gather(key="Simulación", value="val_x") 
-
-ggplot(data, aes(x=val_x, fill=`Simulación`)) +
-    geom_histogram(position="dodge") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim Weibull(\\alpha = 2, \\lambda = 2)$"), 
-        breaks=seq(0, max(data$val_x), length.out=10), 
-        labels=round(seq(0, max(data$val_x), length.out=10), 3)) +
-    scale_fill_manual(values=c("deepskyblue1", "deepskyblue3")) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(), legend.position=c(.7, .6)) +
-    annotate("text", x=1, y=75, 
-        label=latex2exp::TeX("$f(x) =\\lambda\\alpha(\\lambda x)^{\\alpha - 1} exp(-(\\lambda x)^\\alpha)$"), 
-        size=5)
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-23-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-23-1.png" style="display: block; margin: auto;" />
 
 24. *(Problema 421)* Sean
     ![a](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;a
@@ -1354,35 +888,7 @@ En todos los casos se estandariza
 26. Genere en `R` una muestra aleatoria de una ditribución normal con
     los parámetros de su preferencia y muestre el histograma.
 
-<!-- end list -->
-
-``` r
-sam <- map(c(5, 25), rnorm, n=1000, mean=10) %>%
-    setNames(nm=c("N(10, 25)", "N(10, 625)")) %>%
-    bind_rows(.id="Simulación") %>%
-    tidyr::gather(key="Simulación", value="val_x") 
-
-ggplot(sam, aes(x=val_x, fill=`Simulación`)) +
-    geom_histogram(position="dodge") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name=latex2exp::TeX("$X\\sim N(\\mu = 10, \\sigma^2)$"), 
-        breaks=seq(min(sam$val_x), max(sam$val_x), length.out=10), 
-        labels=round(seq(min(sam$val_x), max(sam$val_x), length.out=10), 3)) +
-    scale_fill_manual(values=c("deepskyblue3", "deepskyblue4"),
-        labels=list(latex2exp::TeX("$\\sigma^2 = 5$"), latex2exp::TeX("$\\sigma^2 = 25$"))) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(), legend.position=c(.8, .7)) +
-    annotate("text", x=-45, y=250, 
-        label=latex2exp::TeX("$f(x) = \\frac{1}{\\sqrt{2\\pi}\\sigma} exp^{-\\frac{(x - \\mu)^2}{2\\sigma}}$"), 
-        size=5)
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-    
-    ## Warning in is.na(x): is.na() applied to non-(list or vector) of type
-    ## 'expression'
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-26-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-26-1.png" style="display: block; margin: auto;" />
 
 27. *(Problema 428)* Sea
     ![X](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;X
@@ -1485,29 +991,7 @@ Este ultimo resultado corresponde a la función de distribución
 \\lambda)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Gamma%28%5Calpha%2C%20%5Clambda%29
 "Gamma(\\alpha, \\lambda)").
 
-``` r
-n <- 20
-c <- 5
-alpha <- n / 2
-lambda <- 1 / (2 * c)
-sam <- tibble("Chi-Cuadrado"=c * rchisq(1000, df=n), "Gamma"=rgamma(1000, alpha, lambda)) %>%
-    tidyr::gather(key="Simulación", value="val_x")
-
-ggplot(sam, aes(x=val_x, fill=`Simulación`)) +
-    geom_histogram(position="dodge") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name="", 
-        breaks=seq(0, max(sam$val_x), length.out=10), 
-        labels=round(seq(0, max(sam$val_x), length.out=10), 3)) +
-    scale_fill_manual(values=c("deepskyblue1", "deepskyblue3"),
-        labels=c(latex2exp::TeX("$\\chi{}^{2}$(20)"), latex2exp::TeX("$Gamma(10, .1)$"))) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(), legend.position=c(.7, .6))
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-28-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-28-1.png" style="display: block; margin: auto;" />
 
 29. Para las distribuciones
     ![t](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;t
@@ -1519,45 +1003,13 @@ Para la dsitribución
 ![t](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;t
 "t") con 12 grados de libertad:
 
-``` r
-sim <- tibble(t=rt(5000, 12)) 
-
-ggplot(sim, aes(x=t)) +
-    geom_histogram(fill="deepskyblue3") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name=latex2exp::TeX("$X \\sim t(12)$"), 
-        breaks=seq(0, max(sim$t), length.out=10), 
-        labels=round(seq(0, max(sim$t), length.out=10), 3)) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(), 
-        legend.position=c(.7, .75))
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-29-1-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-29-1-1.png" style="display: block; margin: auto;" />
 
 Para la dsitribución
 ![F](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F
 "F") con 3 y 14 grados de libertad:
 
-``` r
-sim <- tibble(f=rf(5000, 3, 14)) 
-
-ggplot(sim, aes(x=f)) +
-    geom_histogram(fill="deepskyblue3") +
-    scale_y_continuous(name="Frecuencia") +
-    scale_x_continuous(name=latex2exp::TeX("$X \\sim F(3, 14)$"), 
-        breaks=seq(0, max(sim$f), length.out=10), 
-        labels=round(seq(0, max(sim$f), length.out=10), 3)) +
-    theme_light() + 
-    theme(panel.grid.major=element_blank(), 
-        legend.position=c(.7, .75))
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-29-2-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/prob-29-2-1.png" style="display: block; margin: auto;" />
 
 # 2 Gráficos de densidad para las distribuciones de probabilidad.
 
@@ -1569,105 +1021,13 @@ Digamos que de cada distribución tomamos ![n
 = 500](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;n%20%3D%20500
 "n = 500") muestras.
 
-``` r
-dist <- rlang::as_function(distribution)
-d_frame <- tibble(p=rlang::inject(dist(!!!list_args))) %>%
-  mutate(q=list_args$x)
-r_sample <- stringr::str_replace(distribution, "^d", "r")
-sample_distribution <- invoke_map(r_sample, list(list_args[-1]), n=1000)[[1]]
-
-# Calculo la kurtosis y Asimetria para la muestra y la guardo en un vector
-m_3rd_and_4th <- add_row(m_3rd_and_4th, 
-    tibble(Distribution=ifelse(r_sample == "sample", "Uniforme Discreta", r_sample),
-    Kurtosis=moments::kurtosis(sample_distribution), 
-    Skewness=moments::skewness(sample_distribution)))
-
-# Grafico de Muestras y densidad
-qq_plot <- as_tibble(sample_distribution) %>%
-  ggplot(aes(sample=value)) +
-  stat_qq_line(colour = "deepskyblue4", size=1.5) + 
-  stat_qq() + 
-  theme_light(base_size=10) +
-  xlab("Distribución teórica (Normal estandar)") + 
-  theme(panel.grid=element_blank())
-
-vector_limits <- layer_scales(qq_plot)$y$get_limits()
-
-box_plot <- as_tibble(sample_distribution) %>% 
-    ggplot(aes(y=value)) +
-      geom_boxplot(fill="deepskyblue4", alpha=.75) +
-      ylim(vector_limits) + 
-      theme_light() +
-      theme(panel.grid=element_blank(),
-        axis.title=element_blank(), 
-        axis.ticks=element_blank(), 
-        axis.text=element_blank(), 
-        axis.line=element_blank(),
-        panel.background=element_rect(fill="white")
-      )
-
-density_plot <- filter(d_frame, p != 0) %>%
-  ggplot(aes(x=q, y=p)) +
-    theme_light() +
-    theme(panel.grid=element_blank(),
-        axis.title.y=element_blank(), 
-        axis.ticks.y=element_blank(), 
-        axis.text.y=element_blank(), 
-        axis.line.y=element_blank(),
-        panel.background=element_rect(fill="white")) +
-    ylab("Densidad") + coord_flip() + xlim(vector_limits)
-
-if (rlang::is_call(distribution)) {
-    density_plot <- density_plot +
-        geom_bar(stat="identity", width=.1, colour="lightgray") +
-        geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour="deepskyblue4") +
-        geom_point(size=2.5) +
-        geom_point(aes(x=0:10, y=rep(0, 11)), shape=21, fill="white", size=2.5)
-} else {
-    if (distribution %in% c("dbinom", "dgeom", "dhyper", "dnbinom", "dpois")) {
-        density_plot <- density_plot +
-            geom_bar(stat="identity", width=.1, colour="lightgray") +
-            geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour="deepskyblue4") +
-            geom_point(size=2.5) +
-            geom_point(
-                aes(x=filter(d_frame, p != 0)$q, y=rep(0, length(filter(d_frame, p != 0)$q))), 
-                shape=21, fill="white", size=2.5)
-    } else {
-        density_plot <- density_plot +
-            geom_line(size=1.2, colour="deepskyblue4")
-
-        if(!(distribution %in% c("dnorm", "dt"))) {
-            density_plot <- density_plot +
-                geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), 
-                    size=1.2, colour="deepskyblue4") 
-        }
-        if(distribution %in% c("dunif", "dbeta")) {
-            density_plot <- density_plot +
-                geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), 
-                    size=1.2, colour="deepskyblue4") +
-                geom_line(data=tibble(p=rep(0, 2), q=c(1, max(vector_limits))), 
-                    size=1.2, colour="deepskyblue4")
-        }
-    }
-}
-
-cowplot::plot_grid(
-    qq_plot + 
-      scale_y_continuous(name="Distribución muestral",
-            breaks=seq(vector_limits[1], vector_limits[2], length.out=7), 
-            labels=round(seq(vector_limits[1], vector_limits[2], length.out=7), 2)), 
-    box_plot, 
-    density_plot,
-  ncol=3, rel_widths=c(4,1,3), align='h', hjust = -1.5)
-```
-
 ## 2.1 Distribución Uniforme Discreta.
 
 Se simula una Distribución uniforme discreta entre 0 y 10, ![Unif\\{0,
 \\ldots, 10\\}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Unif%5C%7B0%2C%20%5Cldots%2C%2010%5C%7D
 "Unif\\{0, \\ldots, 10\\}").
 
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/dicrete-uniform-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/dicrete-uniform-1.png" style="display: block; margin: auto;" />
 
 ## 2.2 Distribución de Bernoulli.
 
@@ -1677,7 +1037,7 @@ Se simula una Distribución de Bernoulli con probabilidad de éxito de
 ![Ber(p=.7)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Ber%28p%3D.7%29
 "Ber(p=.7)").
 
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/bernoulli-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/bernoulli-1.png" style="display: block; margin: auto;" />
 
 ## 2.3 Distribución Binomial.
 
@@ -1689,14 +1049,7 @@ Se simula una Distribución de Binomial con probabilidad de éxito de
 p=.7)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Bin%28n%3D13%2C%20p%3D.7%29
 "Bin(n=13, p=.7)").
 
-    ## Warning: Removed 3 rows containing missing values (position_stack).
-    
-    ## Warning: Removed 1 rows containing missing values (geom_bar).
-    
-    ## Warning: Removed 3 rows containing missing values (geom_point).
-    ## Removed 3 rows containing missing values (geom_point).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/binomial-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/binomial-1.png" style="display: block; margin: auto;" />
 
 ## 2.4 Distribución Geométrica.
 
@@ -1706,14 +1059,7 @@ Se simula una Distribución Geométrica con probabilidad de éxito de
 ![Geo(p=.4)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Geo%28p%3D.4%29
 "Geo(p=.4)").
 
-    ## Warning: Removed 5 rows containing missing values (position_stack).
-    
-    ## Warning: Removed 1 rows containing missing values (geom_bar).
-    
-    ## Warning: Removed 5 rows containing missing values (geom_point).
-    ## Removed 5 rows containing missing values (geom_point).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/geometrica-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/geometrica-1.png" style="display: block; margin: auto;" />
 
 ## 2.5 Distribución Binomial Negativa.
 
@@ -1725,14 +1071,7 @@ Se simula una Distribución de Binomial con probabilidad de éxito de
 p=.5)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;BinNeg%28r%3D5%2C%20p%3D.5%29
 "BinNeg(r=5, p=.5)").
 
-    ## Warning: Removed 10 rows containing missing values (position_stack).
-    
-    ## Warning: Removed 1 rows containing missing values (geom_bar).
-    
-    ## Warning: Removed 10 rows containing missing values (geom_point).
-    ## Removed 10 rows containing missing values (geom_point).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/binomial-negativa-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/binomial-negativa-1.png" style="display: block; margin: auto;" />
 
 ## 2.6 Distribución Hipergeométrica.
 
@@ -1742,7 +1081,7 @@ en la que se tienen 8 elementos de un tipo y 13 del otro tipo,
 n=5)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Hypergeo%28k%3D8%2C%20m%3D13%2C%20n%3D5%29
 "Hypergeo(k=8, m=13, n=5)").
 
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/hipergeometrica-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/hipergeometrica-1.png" style="display: block; margin: auto;" />
 
 ## 2.7 Distribución de Poisson.
 
@@ -1750,7 +1089,7 @@ Se simula una Distribución de Poisson con parámetro de escala igual a 5,
 ![Pois(\\lambda=5)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Pois%28%5Clambda%3D5%29
 "Pois(\\lambda=5)").
 
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/poisson-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/poisson-1.png" style="display: block; margin: auto;" />
 
 ## 2.8 Distribución uniforme continua.
 
@@ -1758,7 +1097,7 @@ En este caso se simula una Distribución uniforme continua entre 0 y 1,
 ![Unif(0, 1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Unif%280%2C%201%29
 "Unif(0, 1)").
 
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/uniforme-continua-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/uniforme-continua-1.png" style="display: block; margin: auto;" />
 
 ## 2.9 Distribución Exponencial.
 
@@ -1766,9 +1105,7 @@ Se simula una Distribución Exponencial con parámetro igual a 2,
 ![exp(\\lambda=2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;exp%28%5Clambda%3D2%29
 "exp(\\lambda=2)").
 
-    ## Warning: Removed 202 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/exponencial-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/exponencial-1.png" style="display: block; margin: auto;" />
 
 ## 2.10 Distribución Gamma.
 
@@ -1777,9 +1114,7 @@ parámetro de escala igual a 3, ![Gamma(\\alpha=5,
 \\lambda=3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Gamma%28%5Calpha%3D5%2C%20%5Clambda%3D3%29
 "Gamma(\\alpha=5, \\lambda=3)").
 
-    ## Warning: Removed 112 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/gamma-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/gamma-1.png" style="display: block; margin: auto;" />
 
 ## 2.11 Distribución Beta.
 
@@ -1788,19 +1123,7 @@ Se simula una Distribución Beta con parámetro de forma igual a 6 y 2,
 b=2)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Beta%28a%3D6%2C%20b%3D2%29
 "Beta(a=6, b=2)").
 
-    ## Warning: Removed 16 row(s) containing missing values (geom_path).
-    
-    ## Warning: Removed 1 row(s) containing missing values (geom_path).
-    
-    ## geom_path: Each group consists of only one observation. Do you need to adjust
-    ## the group aesthetic?
-    
-    ## Warning: Removed 1 row(s) containing missing values (geom_path).
-    
-    ## geom_path: Each group consists of only one observation. Do you need to adjust
-    ## the group aesthetic?
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/beta-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/beta-1.png" style="display: block; margin: auto;" />
 
 ## 2.12 Distribución de Weibull.
 
@@ -1809,9 +1132,7 @@ parámetro de escala igual a 1, ![Weibull(\\alpha=2,
 \\lambda=1)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Weibull%28%5Calpha%3D2%2C%20%5Clambda%3D1%29
 "Weibull(\\alpha=2, \\lambda=1)").
 
-    ## Warning: Removed 38 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/weibull-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/weibull-1.png" style="display: block; margin: auto;" />
 
 ## 2.13 Distribución Normal.
 
@@ -1821,9 +1142,7 @@ Se simula una Distribución Normal con media 5 y varianza
 \\sigma^2=.64)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;N%28%5Cmu%3D5%2C%20%5Csigma%5E2%3D.64%29
 "N(\\mu=5, \\sigma^2=.64)").
 
-    ## Warning: Removed 156 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/normal-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/normal-1.png" style="display: block; margin: auto;" />
 
 ## 2.14 Distribución Chi-Cuadrado.
 
@@ -1831,9 +1150,7 @@ Se simula una Distribución Chi-Cuadrado con 3 grados de libertad,
 ![\\chi^2(\\gamma=3)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cchi%5E2%28%5Cgamma%3D3%29
 "\\chi^2(\\gamma=3)").
 
-    ## Warning: Removed 13 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/chi-cuadrado-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/chi-cuadrado-1.png" style="display: block; margin: auto;" />
 
 ## 2.15 Distribución ![t](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;t "t")-Student.
 
@@ -1843,9 +1160,7 @@ Se simula una Distribución
 ![t(\\gamma=4)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;t%28%5Cgamma%3D4%29
 "t(\\gamma=4)").
 
-    ## Warning: Removed 208 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/t-student-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/t-student-1.png" style="display: block; margin: auto;" />
 
 ## 2.16 Distribución ![F](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F "F").
 
@@ -1855,21 +1170,13 @@ Se simula una Distribución
 \\gamma\_2=10)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;F%28%5Cgamma_1%3D4%2C%20%5Cgamma_2%3D10%29
 "F(\\gamma_1=4, \\gamma_2=10)").
 
-    ## Warning: Removed 10 row(s) containing missing values (geom_path).
-
-![](Tarea-1-Prob-Stat-2022_files/figure-gfm/f-1.png)<!-- -->
+<img src="Tarea-1-Prob-Stat-2022_files/figure-gfm/f-1.png" style="display: block; margin: auto;" />
 
 31. También calculen los coeficientes de Asimetría y kurtosis para todas
     las muestras de las distribuciones y explique.
 
 Los coeficientes de asimetría y kurtosis para cada una de las
 distribuciones se muestran en la siguiente tabla:
-
-``` r
-m_3rd_and_4th %>%
-    mutate(Distribution=c("Uniforme Discreta", "Bernoulli", "Binomial", "Geometrica", "Binomial Negativa", "Hipergeometrica", "Poisson", "Uniforme Continua", "Exponencial", "Gamma", "Beta", "Weibull", "Normal", "Chi-Cuadrado", "t-Student", "F")) %>%
-    knitr::kable(digits=3, col.names=c("Distribución", "Kurtosis", "Sesgo o Asimetría"))
-```
 
 | Distribución      | Kurtosis | Sesgo o Asimetría |
 | :---------------- | -------: | ----------------: |

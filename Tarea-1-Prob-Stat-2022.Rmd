@@ -7,7 +7,6 @@ output:
  github_document:
   number_sections: yes
   html_preview: no
-  #pandoc_args: ["--webtex=https://latex.codecogs.com/png.latex?"]
  pdf_document:
   keep_tex: yes
   number_sections: yes
@@ -20,7 +19,6 @@ output:
 header-includes:
  - \usepackage{amsmath}
 lang: es
-always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -46,9 +44,12 @@ set.seed(21644350)
 if (knitr::is_latex_output()) {
 	knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
 	knitr::opts_chunk$set(fig.height=4, fig.width=5, fig.align='center')
+} else {
+	knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE)
+	knitr::opts_chunk$set(fig.height=4, fig.width=5, fig.align='center')
 }
 
-klippy::klippy()
+# klippy::klippy()
 ```
 
 # Problemas y Simulaciones.
