@@ -20,6 +20,7 @@ output:
 header-includes:
  - \usepackage{amsmath}
 lang: es
+always_allow_html: true
 ---
 
 ```{r setup}
