@@ -70,7 +70,7 @@ $$P(X \le x) = \sum_{i=1}^x f(x) = \sum_{i=1}^x \frac{1}{n} = \frac{1}{n}\sum_{i
 
 Para la siguiente probabilidad:
 
-$$P(X \ge x) = 1 - P(X < x) = 1 - \sum_{i=1}^{x - 1} f(x) = 1 - \frac{1}{n}\sum_{i=1}^{x-1}1 = 1 - \frac{x - 1}{n}$$
+$$P(X\ge x) = 1-P(X<x) = 1-\sum_{i=1}^{x - 1}f(x) = 1-\frac{1}{n}\sum_{i=1}^{x-1}1 = 1-\frac{x-1}{n}$$
 
 Para las siguientes probabilidades:
 
