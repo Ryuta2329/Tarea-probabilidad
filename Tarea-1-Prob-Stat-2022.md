@@ -61,20 +61,22 @@ $$P(x_1 < X < x_2) = P(X < x_2) - P(X < x_1) = \frac{x_2 - 1}{n} - \frac{x_1 - 1
 Las variables aleatorias $X^3$ y $-X$ toman los mismos valores que $X$, es decir, su valores estan contenidos en el conjunto  $\{-1, 0, 1\}$ de forma que, para $X^3$:
 
 $$
-\begin{aligned*} 
+\begin{aligned} 
 	P(Y = 0) &= P(X^3 = 0) = P(X = 0) = 1/3 \\ 
 	P(Y = 1) &= P(X^3 = 1) = P(X = \sqrt[3]{1}) = P(X = 1) = 1/3 \\
 	P(Y = -1) &= P(X^3 = -1) = P(X = \sqrt[3]{-1}) = P(X = -1) = 1/3 
-\end{aligned*}
+\end{aligned}
 $$
 
 y para $-X$:
 
+$$
 \begin{align*} 
 	P(Y = 0) &= P(-X = 0) = P(X = 0) = 1/3 \\ 
 	P(Y = 1) &= P(-X = 1) = P(X = -1) = 1/3 \\
 	P(Y = -1) &= P(-X = -1) = P(X = 1) = 1/3 
 \end{align*}
+$$
 
 y se demuestra que las distribuciones son las mismas. 
 
