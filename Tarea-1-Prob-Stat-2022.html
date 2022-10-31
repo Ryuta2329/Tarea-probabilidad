@@ -405,14 +405,16 @@ pre code {
 <p>Para la esperanza de <span class="math inline">\(X^2\)</span> se tiene:</p>
 <p><span class="math display">\[E(X^2) = \sum_{x=1}^n x^2\frac{1}{n} = \frac{1}{n}\times(1 + 4 + 9 + 16 + \ldots + n^2) = \frac{1}{n}\frac{n(n+1)(2n + 1)}{6} = \frac{(n + 1)(2n + 1)}{6}\]</span></p>
 <p>Oara la varianza se usa la ecuación <span class="math inline">\(Var(X) = E(X^2) - (E(X))^2\)</span> por lo que:</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[
+\begin{align*} 
     Var(X) &amp;= \frac{(n + 1)(2n + 1)}{6} - \left(\frac{n + 1}{2}\right)^2 \\ 
            &amp;= \frac{(n + 1)(2n + 1)}{6} - \frac{(n+1)^2}{4} \\
            &amp;= \frac{4(n + 1)(2n + 1) - 6(n^2 + 2n + 1)}{24} \\
            &amp;= \frac{8n^2 + 12n + 4 - 6n^2 - 12n - 6}{24} \\
            &amp;= \frac{2n^2 - 2}{24} \\
            &amp;= \frac{n^2 - 1}{12}
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="4" style="list-style-type: decimal">
 <li><em>(Problema 280)</em> Este es un mecanismo para generar valores al azar de una variable aleatoria con distribución <span class="math inline">\(\text{unif}\{x_1, \ldots , x_n\}\)</span> a partir de valores de una variable aleatoria con distribución <span class="math inline">\(\text{unif}(0, 1)\)</span>, la cual aparece definida más adelante. Sea <span class="math inline">\(u\)</span> un valor al azar con distribución <span class="math inline">\(\text{unif}(0, 1)\)</span>. Demuestre que la variable aleatoria <span class="math inline">\(X\)</span>, definida a continuación, tiene distribución <span class="math inline">\(\text{unif}\{x_1, \ldots , x_n\}\)</span>.</li>
 </ol>
@@ -543,19 +545,23 @@ pre code {
 <p>lo cual significa <span class="math inline">\(c = 1/2\)</span>. Para la segunda probabilidad se tiene:</p>
 <p><span class="math display">\[P(X &gt; c + \mu) = 1 - P(X \le c + \mu) = 1 - \int_{0}^{c+\mu} \frac{1}{4}dx = 1 - \frac{1}{4}(c + \mu) = \frac{1}{4}\]</span></p>
 <p>De lo que se obtiene <span class="math inline">\(c = 3 - \mu\)</span>. Como la media de una distribución uniforme es el valor medio entre los límites de la distribución, entonces <span class="math inline">\(\mu = 2\)</span> y <span class="math inline">\(c = 1\)</span>. Para la siguiente probabilidad se tiene:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     P(\vert X - \mu\vert &lt; c) &amp;= P(-c &lt; X - \mu &lt; c) = P(-c + \mu &lt; X &lt; c + \mu) = P(X &lt; c + \mu) - P(X &lt; -c + \mu)\\
         &amp;= P(X \le c + \mu) - P(X = c + \mu) - (P(X \le -c + \mu) - P(X = -c + \mu)) \\
         &amp;= P(X \le c + \mu) - P(X \le -c + \mu) \\
         &amp;= \int_{0}^{c+\mu}\frac{1}{4}dx - \int_{0}^{-c+\mu}\frac{1}{4}dx = \frac{1}{4}(c + \mu) - \frac{1}{4}(-c + \mu) \\
         &amp;= \frac{1}{4}2c = \frac{1}{2}
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>lo cual arroja <span class="math inline">\(c = 1\)</span>. Al igual que antes, si reemplazamos <span class="math inline">\(\mu\)</span> por el valor <span class="math inline">\(4\)</span>, se obtiene un resultado similar al anterior:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     P(\vert X - 4\vert &lt; c) &amp;= P(X &lt; c + 4) - P(X &lt; -c + 4)\\
         &amp;= P(X \le c + 4) - P(X \le -c + 4) \\
         &amp;= \frac{1}{4}2c = \frac{3}{4}
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Entonces, <span class="math inline">\(c = 3/2\)</span>.</p>
 <ol start="16" style="list-style-type: decimal">
 <li><em>(Problema 360)</em> Sea <span class="math inline">\(X\)</span> una variable aleatoria con distribución <span class="math inline">\(\text{unif}(a, b)\)</span>. Demuestre que:</li>
@@ -571,13 +577,15 @@ pre code {
 <p><span class="math display">\[E(X^2) = \int_{-\infty}^{\infty}x^2f(x)dx = \int_{a}^{b}x^2f(x)dx = \int_{a}^{b}\frac{1}{b-a}x^2dx = \frac{1}{b-a}(\frac{b^3}{3} - \frac{a^3}{3})\]</span></p>
 <p>Haciendo la división de polinomios <span class="math inline">\((b^3 - a^3)/(b-a) = a^2 + ab + b^2\)</span> y se obtiene el resultado buscado.</p>
 <p>Para la varianza, se pueden usar los resultados anteriores:</p>
-<p><span class="math display">\[\begin{align*} 
+<p><span class="math display">\[
+\begin{align*} 
     Var(X) &amp;= E(X^2) - (E(X))^2 \\
         &amp;= \frac{a^2 + ab + b^2}{3} - \left(\frac{a + b}{2}\right)^2 \\
         &amp;= \frac{a^2 + ab + b^2}{3} - \frac{a^2 + 2ab + b^2}{4} \\
         &amp;= \frac{4a^2 + 4ab + 4b^2 - 3a^2 - 6ab - 3b^2}{12} \\
         &amp;= \frac{a^2 - 2ab + b^2}{12} = \frac{(b - a)^2}{12}
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="17" style="list-style-type: decimal">
 <li>Simulación 3.11 asigne un valor de su preferencia al parámetro <span class="math inline">\(\lambda\)</span> y genere valores al azar de la distribución exponencial. Genere el histograma.</li>
 </ol>
@@ -596,29 +604,35 @@ pre code {
 <p>Para la segunda probabilidad se tiene:</p>
 <p><span class="math display">\[P(X \ge 2) = 1 - P(X &lt; 2) = 1 -  \int_0^2\lambda e^{-\lambda x}dx = 1 - (1 - e^{-2\lambda}) = e^{-2\lambda} = 0.0183\]</span></p>
 <p>Para la siguiente probabilidad se utiliza la definición de probabilidad condicional, de forma que:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     P(X &lt; 1 \vert X &lt; 2) &amp;= \frac{P(X &lt; 1 \cap X &lt; 2)}{P(X &lt; 2)} = \frac{P(1 \le X &lt; 2)}{P(X &lt; 2)} \\
         &amp;= \frac{\int_1^2\lambda e^{-\lambda x}dx}{\int_0^2\lambda e^{-\lambda x}dx} \\
         &amp;= \frac{-e^{-2\lambda} + e^{-\lambda}}{-e^{-2\lambda} + 1} = \frac{0.117}{0.9817} \\
         &amp;= 0.1192
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Para la cuarta probabilidad se usa la definición de probabilidad condicional, notando que <span class="math inline">\(P(X &gt; 0) = P(\Omega) = 1\)</span>, de forma que:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     P(1 \le X \le 2 \vert X &gt; 0) &amp;= \frac{P(1 \le X \le 2 \cap X &gt; 0)}{P(X &gt; 0)} = P(1 \le X \le 2) \\
         &amp;= \int_1^2\lambda e^{-\lambda x}dx = -e^{-2\lambda} + e^{-\lambda} \\
         &amp;= 0.117
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="19" style="list-style-type: decimal">
 <li><em>(Problema 382)</em> <strong>Propiedad de pérdida de memoria</strong>. Sea <span class="math inline">\(X\)</span> una variable aleatoria con distribución exponencial de parámetro <span class="math inline">\(\lambda\)</span>. Demuestre que, para cualesquiera valores <span class="math inline">\(x,y \ge 0\)</span>,</li>
 </ol>
 <p><span class="math display">\[P(X &gt; x + y \vert X &gt; y) = P(X &gt; x)\]</span></p>
 <p>Usando la definción de probabilidad condicional se tiene:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     P(X &gt; x + y \vert X &gt; y) &amp;= \frac{P(X &gt; x + y \cap  X &gt; y)}{P(X &gt; y)} = \frac{P(X \ge x + y)}{P(X &gt; y)} \\
         &amp;= \frac{\int_{x + y}^\infty\lambda e^{-\lambda x}dx)}{\int_y^\infty\lambda e^{-\lambda x}dx} = \frac{e^{-\lambda (x + y)}}{e^{-\lambda y}}\\
         &amp;= \frac{e^{-\lambda (x + y)}}{e^{-\lambda y}} = e^{-\lambda x} = \int_x^\infty \lambda e^{-\lambda x}dx\\
         &amp;= P(X &gt; x)
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="20" style="list-style-type: decimal">
 <li><em>(Problema 384)</em> Sea <span class="math inline">\(U\)</span> una variable aleatoria con distribución <span class="math inline">\(\text{unif}(0, 1)\)</span> y sea <span class="math inline">\(\lambda &gt; 0\)</span> una constante. Demuestre que la variable aleatoria <span class="math inline">\(X\)</span>, definida a continuación, tiene distribución <span class="math inline">\(\text{exp}(\lambda)\)</span>. Este resultado permite obtener valores al azar de la distribución exponencial a partir de valores de la distribución uniforme continua. Muestre el histograma y compare con los resultados de Simulación 3.11.</li>
 </ol>
@@ -646,22 +660,28 @@ pre code {
 <p>Usando el cambio de variable <span class="math inline">\(t = 1 - x\)</span>, se tiene que:</p>
 <p><span class="math display">\[B(a,b) = -\int_1^0(1 - t)^{a-1}t^{b-1}dt = \int_0^1(1 - t)^{a-1}t^{b-1}dt = B(b,a)\]</span></p>
 <p>Para los siguientes dos incisos, se tiene:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     B(a\text{,}1) &amp;= \int_0^1x^{a-1}(1 - x)^{1-1}dx = \int_0^1x^{a-1}dx = 1^{a}/a - 0^a/a = 1/a \\
     B(1\text{,}b) &amp;= \int_0^1x^{1-1}(1 - x)^{b-1}dx = \int_0^1(1 - x)^{b-1}dx = -(0^{b}/b - 1^b/b) = 1/b \\
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Para los siguientes tres incisos se usa la definición de la función beta en terminos de la función gamma:</p>
 <p><span class="math display">\[B(a, b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)}\]</span></p>
 <p>y la propiedad <span class="math inline">\(\Gamma(\alpha + 1) = \alpha\Gamma(\alpha)\)</span>. De esta forma, se tiene:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     B(a + 1\text{,} b) &amp;= \frac{\Gamma(a + 1)\Gamma(b)}{\Gamma(a + b + 1)} = a\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{ab}{b}\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{a}{b}\frac{\Gamma(a)\Gamma(b + 1)}{\Gamma(a + b + 1)} = \frac{a}{b}B(a\text{,}b + 1) \\
     B(a + 1\text{,} b) &amp;= \frac{\Gamma(a + 1)\Gamma(b)}{\Gamma(a + b + 1)} = a\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{a}{a + b}\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)} = \frac{a}{a + b}B(a\text{,}b) \\
     B(a\text{,}b + 1) &amp;= \frac{\Gamma(a)\Gamma(b + 1)}{\Gamma(a + b + 1)} = b\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{b}{a + b}\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)} = \frac{b}{a + b}B(a\text{,}b) 
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Para el ultimo inciso se utiliza la misma definición de la función beta en terminos de la función gamma, y la propiedad <span class="math inline">\(\Gamma(1/2) = \sqrt{\pi}\)</span> y <span class="math inline">\(\Gamma(1) = 1\)</span>, de forma que:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     B(1/2\text{,}1/2) &amp;= \frac{\Gamma(1/2)\Gamma(1/2)}{\Gamma(1)} = (\Gamma(1/2))^2 = \pi
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="23" style="list-style-type: decimal">
 <li><em>(Problema 410)</em>. Sea <span class="math inline">\(U\)</span> una variable aleatoria con distribución <span class="math inline">\(\text{unif}(0, 1)\)</span> y sean <span class="math inline">\(\alpha &gt; 0\)</span> y <span class="math inline">\(\lambda &lt; 0\)</span> dos constantes. Demuestre que:</li>
 </ol>
@@ -680,14 +700,16 @@ pre code {
 </ol>
 <p><span class="math display">\[P(a &lt; Z^2 &lt; b) = 2(\Phi(\sqrt{b}) - \Phi(\sqrt{a}))\]</span></p>
 <p>Para desmostrar esta igualdad se sigue:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     P(a &lt; Z^2 &lt; b) &amp;= P(\sqrt{a} &lt; Z &lt; \sqrt{b}) + P(-\sqrt{b} &lt; Z &lt; -\sqrt{a}) \\ 
         &amp;= P(Z \le \sqrt{b}) - P(Z \le \sqrt{a}) + P(Z \le -\sqrt{a}) - P(Z \le -\sqrt{b}) \\
         &amp;= P(Z \le \sqrt{b}) - P(Z \le \sqrt{a}) + 1 - P(Z \le \sqrt{a}) - (1 - P(Z \le \sqrt{b})) \\
         &amp;= P(Z \le \sqrt{b}) - P(Z \le \sqrt{a}) + P(Z \le \sqrt{b}) - P(Z \le \sqrt{a}) \\
         &amp;= 2(P(Z \le \sqrt{b}) - P(Z \le \sqrt{a})) \\
         &amp;= 2(\Phi(\sqrt{b}) - \Phi(\sqrt{a}))
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="25" style="list-style-type: decimal">
 <li><em>(Problema 422)</em> Sea <span class="math inline">\(X\)</span> una variable aleatoria con distribución <span class="math inline">\(\text{N}(10, 36)\)</span>. Calcule:</li>
 </ol>
@@ -700,40 +722,52 @@ pre code {
 <li><span class="math inline">\(P(\vert X - 6\vert &gt; 3)\)</span></li>
 </ul>
 <p>En todos los casos se estandariza <span class="math inline">\(X\)</span> como <span class="math inline">\(Z=(X - \mu)/\sigma\)</span>, y se busca la probabilidad:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
 P(X &gt; 5) &amp;= P(X - \mu &gt; 5 - 10) \\
     &amp;= P(X - \mu &gt; -5) \\
     &amp;= P(\frac{X - \mu}{\sigma} &gt; -\frac{5}{6}) \\
     &amp;= P(Z &gt; -\frac{5}{6}) \\
     &amp;= 1 - P(Z \le -\frac{5}{6}) \\
     &amp;= 0.7977 \\
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> <span class="math display">\[
+\begin{align*}
 P(4 &lt; X &lt; 16) &amp;= P(-1 &lt; Z &lt; 1) \\
     &amp;= P(Z \le 1) - P(Z \le -1) \\
     &amp;= 0.8413 - 0.1587 \\
     &amp;= 0.6826 \\
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> <span class="math display">\[
+\begin{align*}
 P(X \le 8) &amp;= P(Z \le -1/3) \\
     &amp;= 0.3694 \\
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> <span class="math display">\[
+\begin{align*}
 P(X \ge 16) &amp;= 1 - P(X \le 16) \\
     &amp;= 1 - P(Z \le 1) \\
     &amp;= 0.1587 \\
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> <span class="math display">\[
+\begin{align*}
 P(\vert X - 4\vert \le 6) &amp;= P(-6 \le X - 4 \le 6) \\
     &amp;= P(-2 \le X \le 10) \\
     &amp;= P(-2 \le Z \le 0) \\
     &amp;= P(Z \le 0) -  P(Z \le -2) \\
     &amp;= 0.5 - 0.0228 \\
     &amp;= 0.4772 \\
-\end{align*}\]</span> <span class="math display">\[\begin{align*}
+\end{align*}
+\]</span> <span class="math display">\[
+\begin{align*}
 P(\vert X - 6\vert &gt; 3) &amp;= P(X - 6 &lt; -3 \cup X - 6 &gt; 3 ) \\
     &amp;= P(X - 6 &lt; -3) + P(X - 6 &gt; 3) \\
     &amp;= P(X &lt; 3) + P(X &gt; 9) \\
     &amp;= P(Z &lt; -7/6) + P(Z &gt; -1/6) \\
     &amp;= P(Z \le -7/6) + 1 - P(Z \le -1/6) \\
     &amp;= 0.6879 
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <ol start="26" style="list-style-type: decimal">
 <li>Genere en <code>R</code> una muestra aleatoria de una ditribución normal con los parámetros de su preferencia y muestre el histograma.</li>
 </ol>
@@ -746,14 +780,16 @@ P(\vert X - 6\vert &gt; 3) &amp;= P(X - 6 &lt; -3 \cup X - 6 &gt; 3 ) \\
 <li>Si <span class="math inline">\(X \sim \text{N}(0, 1)\)</span> entonces <span class="math inline">\(X^2 \sim \chi^2(1)\)</span></li>
 </ul>
 <p>Para <span class="math inline">\(x &gt; 0\)</span>:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     F_{X^2}(x) &amp;= P(X^2 \le x) \\
         &amp;= P(\vert X\vert \le \sqrt{x}) \\
         &amp;= P(\vert X\vert \le \sqrt{x}) \\
         &amp;= P(-\sqrt{x} \le X \le \sqrt{x}) \\
         &amp;= P(X \le \sqrt{x}) - P(X \le -\sqrt{x}) \\
         &amp;= F_X(\sqrt{x}) - F_X(-\sqrt{x})
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Usando el resultado anterior, y tomando en cuenta que <span class="math inline">\(F_X(\sqrt{x}) = \Phi(\sqrt{x})\)</span> y que <span class="math inline">\(\Phi(-\sqrt{x}) = 1 - \Phi(\sqrt{x})\)</span>, entonces:</p>
 <p><span class="math display">\[F_{X^2}(x) = F_X(\sqrt{x}) - F_X(-\sqrt{x}) = \Phi(\sqrt{x}) - \Phi(-\sqrt{x}) = 2\Phi(\sqrt{x}) - 1\]</span></p>
 <p>Derivando ambos lados:</p>
@@ -765,17 +801,21 @@ P(\vert X - 6\vert &gt; 3) &amp;= P(X - 6 &lt; -3 \cup X - 6 &gt; 3 ) \\
 <li><em>(Problema 429)</em>. Sea <span class="math inline">\(X\)</span> una variable aleatoria con distribución <span class="math inline">\(\chi^2(n)\)</span> y sea <span class="math inline">\(c &gt; 0\)</span> una constante. Defina los parámetros <span class="math inline">\(\alpha = n/2\)</span> y <span class="math inline">\(\lambda = 1/(2c)\)</span>. Demuestre que: <span class="math inline">\(cX \sim gamma(\alpha, \lambda)\)</span>. Genere en <code>R</code> una muestra aleatoria con los parámetros de su preferencia y muestre el histograma.</li>
 </ol>
 <p>Se tiene que <span class="math inline">\(F_X(x) \sim \chi^2(n)\)</span>. Ahora:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     F_{cX}(x) &amp;= P(cX \le x) = P(X \le x/c) \\
         &amp;= \int_{0}^{x/c}\frac{1}{\Gamma(n/2)}\left(\frac{1}{2}\right)^{n/2}u^{n/2 - 1}e^{-u/2}du \\
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Derivando con respecto a <span class="math inline">\(x\)</span>, y luego integrando de <span class="math inline">\(-\infty\)</span> a <span class="math inline">\(x\)</span> queda:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
     F_{cX}(x) &amp;= \int_{0}^{x}\frac{1}{\Gamma(n/2)}\left(\frac{1}{2}\right)^{n/2}\frac{1}{c}\left(\frac{u}{c}\right)^{n/2 - 1}e^{-u/2c}du \\
         &amp;= \int_{0}^{x}\frac{1}{\Gamma(n/2)}\left(\frac{1}{2c}\right)^{n/2 - 1}\left(\frac{1}{2c}\right)u^{n/2 - 1}e^{-u/2c}du \\
         &amp;= \int_{0}^{x}\frac{1}{\Gamma(n/2)}\left(\frac{u}{2c}\right)^{n/2 - 1}\left(\frac{1}{2c}\right)e^{-u/2c}du \\
         &amp;= \int_{0}^{x}\frac{1}{\Gamma(\alpha)}(\lambda u)^{n/2 - 1}\lambda e^{-\lambda u}du
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Este ultimo resultado corresponde a la función de distribución <span class="math inline">\(Gamma(\alpha, \lambda)\)</span>.</p>
 <p><img src="data:image/png;base64,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" style="display: block; margin: auto;" /></p>
 <ol start="29" style="list-style-type: decimal">

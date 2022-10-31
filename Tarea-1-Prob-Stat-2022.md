@@ -96,6 +96,7 @@ $$E(X^2) = \sum_{x=1}^n x^2\frac{1}{n} = \frac{1}{n}\times(1 + 4 + 9 + 16 + \ldo
 
 Oara la varianza se usa la ecuación $Var(X) = E(X^2) - (E(X))^2$ por lo que:
 
+$$
 \begin{align*} 
 	Var(X) &= \frac{(n + 1)(2n + 1)}{6} - \left(\frac{n + 1}{2}\right)^2 \\ 
 		   &= \frac{(n + 1)(2n + 1)}{6} - \frac{(n+1)^2}{4} \\
@@ -104,6 +105,7 @@ Oara la varianza se usa la ecuación $Var(X) = E(X^2) - (E(X))^2$ por lo que:
 		   &= \frac{2n^2 - 2}{24} \\
 		   &= \frac{n^2 - 1}{12}
 \end{align*}
+$$
 
 4. _(Problema 280)_ Este es un mecanismo para generar valores al azar de una variable aleatoria con distribución $\text{unif}\{x_1, \ldots , x_n\}$ a partir de valores de una variable aleatoria con distribución $\text{unif}(0, 1)$, la cual aparece definida más adelante. Sea $u$ un valor al azar con distribución $\text{unif}(0, 1)$. Demuestre que la variable aleatoria $X$, definida a continuación, tiene distribución $\text{unif}\{x_1, \ldots , x_n\}$.
 
@@ -246,6 +248,7 @@ De lo que se obtiene $c = 3 - \mu$.
 Como la media de una distribución uniforme es el valor medio entre los límites de la distribución, entonces $\mu = 2$ y $c = 1$. 
 Para la siguiente probabilidad se tiene:
 
+$$
 \begin{align*}
 	P(\vert X - \mu\vert < c) &= P(-c < X - \mu < c) = P(-c + \mu < X < c + \mu) = P(X < c + \mu) - P(X < -c + \mu)\\
 		&= P(X \le c + \mu) - P(X = c + \mu) - (P(X \le -c + \mu) - P(X = -c + \mu)) \\
@@ -253,15 +256,18 @@ Para la siguiente probabilidad se tiene:
 		&= \int_{0}^{c+\mu}\frac{1}{4}dx - \int_{0}^{-c+\mu}\frac{1}{4}dx = \frac{1}{4}(c + \mu) - \frac{1}{4}(-c + \mu) \\
 		&= \frac{1}{4}2c = \frac{1}{2}
 \end{align*}
+$$
 
 lo cual arroja $c = 1$.
 Al igual que antes, si reemplazamos $\mu$ por el valor $4$, se obtiene un resultado similar al anterior:
 
+$$
 \begin{align*}
 	P(\vert X - 4\vert < c) &= P(X < c + 4) - P(X < -c + 4)\\
 		&= P(X \le c + 4) - P(X \le -c + 4) \\
 		&= \frac{1}{4}2c = \frac{3}{4}
 \end{align*}
+$$
 
 Entonces, $c = 3/2$. 
 
@@ -283,6 +289,7 @@ Haciendo la división de polinomios $(b^3 - a^3)/(b-a) = a^2 + ab + b^2$ y se ob
 
 Para la varianza, se pueden usar los resultados anteriores:
 
+$$
 \begin{align*} 
 	Var(X) &= E(X^2) - (E(X))^2 \\
 		&= \frac{a^2 + ab + b^2}{3} - \left(\frac{a + b}{2}\right)^2 \\
@@ -290,6 +297,7 @@ Para la varianza, se pueden usar los resultados anteriores:
 		&= \frac{4a^2 + 4ab + 4b^2 - 3a^2 - 6ab - 3b^2}{12} \\
 		&= \frac{a^2 - 2ab + b^2}{12} = \frac{(b - a)^2}{12}
 \end{align*}
+$$
 
 17. Simulación 3.11 asigne un valor de su preferencia al parámetro $\lambda$ y genere valores al azar de la distribución exponencial. Genere el histograma.
 
@@ -312,20 +320,24 @@ $$P(X \ge 2) = 1 - P(X < 2) = 1 -  \int_0^2\lambda e^{-\lambda x}dx = 1 - (1 - e
 
 Para la siguiente probabilidad se utiliza la definición de probabilidad condicional, de forma que:
 
+$$
 \begin{align*}
 	P(X < 1 \vert X < 2) &= \frac{P(X < 1 \cap X < 2)}{P(X < 2)} = \frac{P(1 \le X < 2)}{P(X < 2)} \\
 		&= \frac{\int_1^2\lambda e^{-\lambda x}dx}{\int_0^2\lambda e^{-\lambda x}dx} \\
 		&= \frac{-e^{-2\lambda} + e^{-\lambda}}{-e^{-2\lambda} + 1} = \frac{0.117}{0.9817} \\
 		&= 0.1192
 \end{align*}
+$$
 
 Para la cuarta probabilidad se usa la definición de probabilidad condicional, notando que $P(X > 0) = P(\Omega) = 1$, de forma que:
 
+$$
 \begin{align*}
 	P(1 \le X \le 2 \vert X > 0) &= \frac{P(1 \le X \le 2 \cap X > 0)}{P(X > 0)} = P(1 \le X \le 2) \\
 		&= \int_1^2\lambda e^{-\lambda x}dx = -e^{-2\lambda} + e^{-\lambda} \\
 		&= 0.117
 \end{align*}
+$$
 
 19. _(Problema 382)_ **Propiedad de pérdida de memoria**. Sea $X$ una variable aleatoria con distribución exponencial de parámetro $\lambda$. Demuestre que, para cualesquiera valores $x,y \ge 0$,
 
@@ -333,12 +345,14 @@ $$P(X > x + y \vert X > y) = P(X > x)$$
 
 Usando la definción de probabilidad condicional se tiene:
 
+$$
 \begin{align*}
 	P(X > x + y \vert X > y) &= \frac{P(X > x + y \cap  X > y)}{P(X > y)} = \frac{P(X \ge x + y)}{P(X > y)} \\
 		&= \frac{\int_{x + y}^\infty\lambda e^{-\lambda x}dx)}{\int_y^\infty\lambda e^{-\lambda x}dx} = \frac{e^{-\lambda (x + y)}}{e^{-\lambda y}}\\
 		&= \frac{e^{-\lambda (x + y)}}{e^{-\lambda y}} = e^{-\lambda x} = \int_x^\infty \lambda e^{-\lambda x}dx\\
 		&= P(X > x)
 \end{align*}
+$$
 
 20. _(Problema 384)_ Sea $U$ una variable aleatoria con distribución $\text{unif}(0, 1)$ y sea $\lambda > 0$ una constante. Demuestre que la variable aleatoria $X$, definida a continuación, tiene distribución $\text{exp}(\lambda)$. Este resultado permite obtener valores al azar de la distribución exponencial a partir de valores de la distribución uniforme continua. Muestre el histograma y compare con los resultados de Simulación 3.11.
 
@@ -372,10 +386,12 @@ $$B(a,b) = -\int_1^0(1 - t)^{a-1}t^{b-1}dt = \int_0^1(1 - t)^{a-1}t^{b-1}dt = B(
 
 Para los siguientes dos incisos, se tiene:
 
+$$
 \begin{align*}
 	B(a\text{,}1) &= \int_0^1x^{a-1}(1 - x)^{1-1}dx = \int_0^1x^{a-1}dx = 1^{a}/a - 0^a/a = 1/a \\
 	B(1\text{,}b) &= \int_0^1x^{1-1}(1 - x)^{b-1}dx = \int_0^1(1 - x)^{b-1}dx = -(0^{b}/b - 1^b/b) = 1/b \\
 \end{align*}
+$$
 
 Para los siguientes tres incisos se usa la definición de la función beta en terminos de la función gamma:
 
@@ -383,17 +399,21 @@ $$B(a, b) = \frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)}$$
 
 y la propiedad $\Gamma(\alpha + 1) = \alpha\Gamma(\alpha)$. De esta forma, se tiene:
 
+$$
 \begin{align*}
 	B(a + 1\text{,} b) &= \frac{\Gamma(a + 1)\Gamma(b)}{\Gamma(a + b + 1)} = a\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{ab}{b}\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{a}{b}\frac{\Gamma(a)\Gamma(b + 1)}{\Gamma(a + b + 1)} = \frac{a}{b}B(a\text{,}b + 1) \\
 	B(a + 1\text{,} b) &= \frac{\Gamma(a + 1)\Gamma(b)}{\Gamma(a + b + 1)} = a\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{a}{a + b}\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)} = \frac{a}{a + b}B(a\text{,}b) \\
 	B(a\text{,}b + 1) &= \frac{\Gamma(a)\Gamma(b + 1)}{\Gamma(a + b + 1)} = b\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b + 1)} = \frac{b}{a + b}\frac{\Gamma(a)\Gamma(b)}{\Gamma(a + b)} = \frac{b}{a + b}B(a\text{,}b) 
 \end{align*}
+$$
 
 Para el ultimo inciso se utiliza la misma definición de la función beta en terminos de la función gamma, y la propiedad $\Gamma(1/2) = \sqrt{\pi}$ y $\Gamma(1) = 1$, de forma que:
 
+$$
 \begin{align*}
 	B(1/2\text{,}1/2) &= \frac{\Gamma(1/2)\Gamma(1/2)}{\Gamma(1)} = (\Gamma(1/2))^2 = \pi
 \end{align*}
+$$
 
 23. _(Problema 410)_. Sea $U$ una variable aleatoria con distribución $\text{unif}(0, 1)$ y sean $\alpha > 0$ y $\lambda <  0$ dos constantes. Demuestre que:
 
@@ -423,6 +443,7 @@ $$P(a < Z^2 < b) = 2(\Phi(\sqrt{b}) - \Phi(\sqrt{a}))$$
 
 Para desmostrar esta igualdad se sigue:
 
+$$
 \begin{align*}
 	P(a < Z^2 < b) &= P(\sqrt{a} < Z < \sqrt{b}) + P(-\sqrt{b} < Z < -\sqrt{a}) \\ 
 		&= P(Z \le \sqrt{b}) - P(Z \le \sqrt{a}) + P(Z \le -\sqrt{a}) - P(Z \le -\sqrt{b}) \\
@@ -431,6 +452,7 @@ Para desmostrar esta igualdad se sigue:
 		&= 2(P(Z \le \sqrt{b}) - P(Z \le \sqrt{a})) \\
 		&= 2(\Phi(\sqrt{b}) - \Phi(\sqrt{a}))
 \end{align*}
+$$
 
 25. _(Problema 422)_ Sea $X$ una variable aleatoria con distribución $\text{N}(10, 36)$. Calcule:
 
@@ -443,6 +465,7 @@ Para desmostrar esta igualdad se sigue:
 
 En todos los casos se estandariza $X$ como $Z=(X - \mu)/\sigma$, y se busca la probabilidad:
 
+$$
 \begin{align*}
 P(X > 5) &= P(X - \mu > 5 - 10) \\
 	&= P(X - \mu > -5) \\
@@ -451,21 +474,29 @@ P(X > 5) &= P(X - \mu > 5 - 10) \\
 	&= 1 - P(Z \le -\frac{5}{6}) \\
 	&= 0.7977 \\
 \end{align*}
+$$
+$$
 \begin{align*}
 P(4 < X < 16) &= P(-1 < Z < 1) \\
 	&= P(Z \le 1) - P(Z \le -1) \\
 	&= 0.8413 - 0.1587 \\
 	&= 0.6826 \\
 \end{align*}
+$$
+$$
 \begin{align*}
 P(X \le 8) &= P(Z \le -1/3) \\
 	&= 0.3694 \\
 \end{align*}
+$$
+$$
 \begin{align*}
 P(X \ge 16) &= 1 - P(X \le 16) \\
 	&= 1 - P(Z \le 1) \\
 	&= 0.1587 \\
 \end{align*}
+$$
+$$
 \begin{align*}
 P(\vert X - 4\vert \le 6) &= P(-6 \le X - 4 \le 6) \\
 	&= P(-2 \le X \le 10) \\
@@ -474,6 +505,8 @@ P(\vert X - 4\vert \le 6) &= P(-6 \le X - 4 \le 6) \\
 	&= 0.5 - 0.0228 \\
 	&= 0.4772 \\
 \end{align*}
+$$
+$$
 \begin{align*}
 P(\vert X - 6\vert > 3) &= P(X - 6 < -3 \cup X - 6 > 3 ) \\
 	&= P(X - 6 < -3) + P(X - 6 > 3) \\
@@ -482,6 +515,7 @@ P(\vert X - 6\vert > 3) &= P(X - 6 < -3 \cup X - 6 > 3 ) \\
 	&= P(Z \le -7/6) + 1 - P(Z \le -1/6) \\
 	&= 0.6879 
 \end{align*}
+$$
 
 26. Genere en ```R``` una muestra aleatoria de una ditribución normal con los parámetros de su preferencia y muestre el histograma.
 
@@ -494,6 +528,7 @@ P(\vert X - 6\vert > 3) &= P(X - 6 < -3 \cup X - 6 > 3 ) \\
 
 Para $x > 0$: 
 
+$$
 \begin{align*}
 	F_{X^2}(x) &= P(X^2 \le x) \\
 		&= P(\vert X\vert \le \sqrt{x}) \\
@@ -502,6 +537,7 @@ Para $x > 0$:
 		&= P(X \le \sqrt{x}) - P(X \le -\sqrt{x}) \\
 		&= F_X(\sqrt{x}) - F_X(-\sqrt{x})
 \end{align*}
+$$
 
 Usando el resultado anterior, y tomando en cuenta que $F_X(\sqrt{x}) = \Phi(\sqrt{x})$ y que $\Phi(-\sqrt{x}) = 1 - \Phi(\sqrt{x})$, entonces:
 
@@ -521,19 +557,23 @@ la cual coincide con la función de distribución de $\chi^2(1)$.
 
 Se tiene que $F_X(x) \sim \chi^2(n)$. Ahora:
 
+$$
 \begin{align*}
 	F_{cX}(x) &= P(cX \le x) = P(X \le x/c) \\
 		&= \int_{0}^{x/c}\frac{1}{\Gamma(n/2)}\left(\frac{1}{2}\right)^{n/2}u^{n/2 - 1}e^{-u/2}du \\
 \end{align*}
+$$
 
 Derivando con respecto a $x$, y luego integrando de $-\infty$ a $x$ queda:
 
+$$
 \begin{align*}
 	F_{cX}(x) &= \int_{0}^{x}\frac{1}{\Gamma(n/2)}\left(\frac{1}{2}\right)^{n/2}\frac{1}{c}\left(\frac{u}{c}\right)^{n/2 - 1}e^{-u/2c}du \\
 		&= \int_{0}^{x}\frac{1}{\Gamma(n/2)}\left(\frac{1}{2c}\right)^{n/2 - 1}\left(\frac{1}{2c}\right)u^{n/2 - 1}e^{-u/2c}du \\
 		&= \int_{0}^{x}\frac{1}{\Gamma(n/2)}\left(\frac{u}{2c}\right)^{n/2 - 1}\left(\frac{1}{2c}\right)e^{-u/2c}du \\
 		&= \int_{0}^{x}\frac{1}{\Gamma(\alpha)}(\lambda u)^{n/2 - 1}\lambda e^{-\lambda u}du
 \end{align*}
+$$
 
 Este ultimo resultado corresponde a la función de distribución $Gamma(\alpha, \lambda)$. 
 
