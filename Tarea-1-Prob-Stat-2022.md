@@ -4,13 +4,13 @@ subtitle:
 author: Marcelo J. Molinatti
 date: "2022-10-31"
 output:
- html_document:
-  number_sections: yes
-  keep_md: yes
  github_document:
   number_sections: yes
   html_preview: no
   pandoc_args: ["--webtex=https://latex.codecogs.com/png.latex?"]
+ html_document:
+  number_sections: yes
+  keep_md: yes
  pdf_document:
   keep_tex: yes
   number_sections: yes
@@ -196,7 +196,7 @@ Como $n - 1 = x$ es el número de fracasos antes del primer éxito, entonces se 
 
 <img src="Tarea-1-Prob-Stat-2022_files/figure-html/prob-10-1.png" style="display: block; margin: auto;" />
 
-11. _(Problema 328)_ Sea $X_1, X_2, \ldots$ una sucesión de variables aleatorias independientes con distribución $\text{Ber}(p)$ y sea $r \ge 1$ un entero. Defina $X = min\{n \ge r : \sum_{k=1}^nX_k = r\} - r$. Demuestre que $X$ tiene distribución $\text{binNeg}(r, p)$. Esto permite encontrar valores al azar de la distribución binomial negativa a partir de valores al azar de la distribución Bernoulli.
+11. _(Problema 328)_ Sea $X_1, X_2, \ldots$ una sucesión de variables aleatorias independientes con distribución $\text{Ber}(p)$ y sea $r \ge 1$ un entero. Defina $X = \text{min}\left{n \ge r : \sum_{k=1}^nX_k = r \right} - r$. Demuestre que $X$ tiene distribución $\text{binNeg}(r, p)$. Esto permite encontrar valores al azar de la distribución binomial negativa a partir de valores al azar de la distribución Bernoulli.
 
 Se tiene que cada ensayo es independiente con distribución de Bernoulli, y se repite hasta obtener $r$ éxitos. Por lo tanto:
 
