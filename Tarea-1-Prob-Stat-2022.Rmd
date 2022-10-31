@@ -7,7 +7,7 @@ output:
  github_document:
   number_sections: yes
   html_preview: no
-  pandoc_args: ["--webtex=https://latex.codecogs.com/png.latex?"]
+  #pandoc_args: ["--webtex=https://latex.codecogs.com/png.latex?"]
  pdf_document:
   keep_tex: yes
   number_sections: yes
