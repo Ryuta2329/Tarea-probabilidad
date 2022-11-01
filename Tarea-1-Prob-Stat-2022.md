@@ -151,7 +151,11 @@ Si se generan de manera independiente $n$ valores al azar de la distribución $\
 
 <img src="Tarea-1-Prob-Stat-2022_files/figure-html/prob-8-1.png" style="display: block; margin: auto;" />
 
-La probabilidad de obtener la nota minima aprobatoria es $P(X \ge 6) = 1 - P(X < 6) = 1 - \sum_{k=0}^5 P(X = k) =$ 0.213, la cual es una probabilidad baja (solo hay un 21.3 % de probabilidad de que el alumno apruebe al escoger respuestas al azar).
+La probabilidad de obtener la nota minima aprobatoria es:
+
+$$P(X \ge 6) = 1 - P(X < 6) = 1 - \sum_{k=0}^5 P(X = k) = 0.213$$
+
+la cual es una probabilidad baja (solo hay un 21.3 % de probabilidad de que el alumno apruebe al escoger respuestas al azar).
 
 9. _(Problema 314)_ Sea $X_0, X_1, \ldots$ una sucesión de variables aleatorias independientes con distribución $\text{Ber}(p)$. Defina: $X = \text{min} \\{ n \ge 0 : X_n \\}$. Demuestre que $X$ tiene distribución $\text{geo}(p)$. Esto permite encontrar valores al azar de la distribución geométrica a partir de una sucesión de valores al azar de la distribución Bernoulli. Implemente en ```R```.
 
@@ -167,13 +171,13 @@ Como $n - 1 = x$ es el número de fracasos antes del primer éxito, entonces se 
 
 <img src="Tarea-1-Prob-Stat-2022_files/figure-html/prob-10-1.png" style="display: block; margin: auto;" />
 
-11. _(Problema 328)_ Sea $X_1, X_2, \ldots$ una sucesión de variables aleatorias independientes con distribución $\text{Ber}(p)$ y sea $r \ge 1$ un entero. Defina $X = \text{min} \\{ n \ge r : X_n = r \\} - r$. Demuestre que $X$ tiene distribución $\text{binNeg}(r, p)$. Esto permite encontrar valores al azar de la distribución binomial negativa a partir de valores al azar de la distribución Bernoulli.
+11. _(Problema 328)_ Sea $X_1, X_2, \ldots$ una sucesión de variables aleatorias independientes con distribución $\text{Ber}(p)$ y sea $r \ge 1$ un entero. Defina $X = \text{min} \\{ n \ge r : \sum_kX_k = r \\} - r$. Demuestre que $X$ tiene distribución $\text{binNeg}(r, p)$. Esto permite encontrar valores al azar de la distribución binomial negativa a partir de valores al azar de la distribución Bernoulli.
 
 Se tiene que cada ensayo es independiente con distribución de Bernoulli, y se repite hasta obtener $r$ éxitos. Por lo tanto:
 
 $$P(X = \text{min} \\{ n \ge 0 : X_n \\} ) = \left(\prod_{k=1}^xP(X = 0)\right)\left(\prod_{k=1}^rP(X = 1)\right) = (1-p)^{x}p^r$$
 
-Como el número de fracasos y los $r - 1$ pueden ocurrir en cualquier orden, se multiplica esta prob abilidad por el $\binom{x + r - 1}{x}$; y se demuestra que la distribución es Binomial Negativa. Implemente en ```R```.
+Como el número de fracasos y los $r - 1$ pueden ocurrir en cualquier orden, se multiplica esta probabilidad por el $\binom{x + r - 1}{x}$; y se demuestra que la distribución es Binomial Negativa. Implemente en ```R```.
 
 <img src="Tarea-1-Prob-Stat-2022_files/figure-html/prob-11-1.png" style="display: block; margin: auto;" />
 

@@ -338,7 +338,11 @@ ggplot(sim, aes(x=value, y=n))+
 	theme(panel.grid.major=element_blank())
 ```
 
-La probabilidad de obtener la nota minima aprobatoria es $P(X \ge 6) = 1 - P(X < 6) = 1 - \sum_{k=0}^5 P(X = k) =$ `r round(1 - sum(sim$n[sim$value < 5]) / 1000, 5)`, la cual es una probabilidad baja (solo hay un `r 100 * round(1 - sum(sim$n[sim$value < 5]) / 1000, 5)` % de probabilidad de que el alumno apruebe al escoger respuestas al azar).
+La probabilidad de obtener la nota minima aprobatoria es:
+
+$$P(X \ge 6) = 1 - P(X < 6) = 1 - \sum_{k=0}^5 P(X = k) = `r round(1 - sum(sim$n[sim$value < 5]) / 1000, 5)`$$
+
+la cual es una probabilidad baja (solo hay un `r 100 * round(1 - sum(sim$n[sim$value < 5]) / 1000, 5)` % de probabilidad de que el alumno apruebe al escoger respuestas al azar).
 
 9. _(Problema 314)_ Sea $X_0, X_1, \ldots$ una sucesión de variables aleatorias independientes con distribución $\text{Ber}(p)$. Defina: $X = \text{min} \{ n \ge 0 : X_n \}$. Demuestre que $X$ tiene distribución $\text{geo}(p)$. Esto permite encontrar valores al azar de la distribución geométrica a partir de una sucesión de valores al azar de la distribución Bernoulli. Implemente en ```R```.
 
@@ -425,7 +429,7 @@ Se tiene que cada ensayo es independiente con distribución de Bernoulli, y se r
 
 $$P(X = \text{min} \{ n \ge 0 : X_n \} ) = \left(\prod_{k=1}^xP(X = 0)\right)\left(\prod_{k=1}^rP(X = 1)\right) = (1-p)^{x}p^r$$
 
-Como el número de fracasos y los $r - 1$ pueden ocurrir en cualquier orden, se multiplica esta prob abilidad por el $\binom{x + r - 1}{x}$; y se demuestra que la distribución es Binomial Negativa. Implemente en ```R```.
+Como el número de fracasos y los $r - 1$ pueden ocurrir en cualquier orden, se multiplica esta probabilidad por el $\binom{x + r - 1}{x}$; y se demuestra que la distribución es Binomial Negativa. Implemente en ```R```.
 
 ```{r prob-11}
 r <- 3 # Numnero de exitos
@@ -1057,7 +1061,7 @@ ggplot(sim, aes(x=f)) +
 
 ```{r part-2, include=FALSE}
 rm(list=ls())
-knitr::opts_chunk$set(fig.height=3.5, fig.width=10)
+knitr::opts_chunk$set(fig.height=4, fig.width=10)
 
 # Data frame para almacenar kurtosis y asimetria.
 m_3rd_and_4th <- tibble(Distribution=character(), Kurtosis=numeric(), Skewness=numeric())
@@ -1077,19 +1081,59 @@ reveal <- function(chunk_name, distribution, list_args) {
 			"sample_distribution <- invoke_map(r_sample, list(list_args[-1]), n=1000)[[1]]",
 			"sample_distribution <- invoke_map(r_sample, list(list_args))[[1]]",
 			content[5], fixed=TRUE)
-	}
+		content[46] <- gsub(" $", "+", content[46])
+		content <- c(content[1:46], 
+			"geom_bar(stat=\"identity\", width=.1, colour=\"lightgray\") +",
+			"geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour=\"deepskyblue4\") +",
+  			"geom_point(size=2.5) +",
+  			"geom_point(aes(x=0:10, y=rep(0, 11)), shape=21, fill=\"white\", size=2.5)", 
+  			content[47:length(content)])
+	} else {
+		if ((distribution %in% c("dbinom", "dgeom", "dhyper", "dnbinom", "dpois"))){
+			if (distribution == "dhyper") {
+				content[5] <- gsub(
+					"sample_distribution <- invoke_map(r_sample, list(list_args[-1]), n=1000)[[1]]",
+					"sample_distribution <- invoke_map(r_sample, list(list_args[-1]), nn=1000)[[1]]",
+					content[5], fixed=TRUE)
+			}
 
-	if (is.character(distribution) & distribution == "dhyper") {
-		content[5] <- gsub(
-			"sample_distribution <- invoke_map(r_sample, list(list_args[-1]), n=1000)[[1]]",
-			"sample_distribution <- invoke_map(r_sample, list(list_args[-1]), nn=1000)[[1]]",
-			content[5], fixed=TRUE)
+			content[46] <- gsub(" $", "+", content[46])
+			content <- c(content[1:46], 
+				"geom_bar(stat=\"identity\", width=.1, colour=\"lightgray\") +",
+				"geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour=\"deepskyblue4\") +",
+	  			"geom_point(size=2.5) +",
+	  			"geom_point(aes(x=filter(d_frame, p != 0)$q, y=rep(0, length(filter(d_frame, p != 0)$q))), shape=21, fill=\"white\", size=2.5)", 
+	  			content[47:length(content)])
+		} else {
+			content[46] <- gsub(" $", "+", content[46])
+			content <- c(content[1:46], 
+				"geom_line(size=1.2, colour=\"deepskyblue4\")  ",
+				content[47:length(content)])
+
+			if(!(distribution %in% c("dnorm", "dt"))) {
+				content[37] <- gsub(
+					"density_plot <- filter(d_frame, p != 0) %>%", 
+					"density_plot <- filter(d_frame, between(q, 0, max(q))) %>%", 
+					content[37], fixed=TRUE)
+				content[47] <- gsub(" $", "+", content[47])
+		  		content <- c(content[1:47], 
+		  			"geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), size=1.2, colour=\"deepskyblue4\")  ", content[48:length(content)]) 
+			}
+			if(distribution %in% c("dunif", "dbeta")) {
+				content[37] <- gsub(
+					"density_plot <- filter(d_frame, p != 0) %>%", 
+					"density_plot <- filter(d_frame, between(q, 0, 1)) %>%", 
+					content[37], fixed=TRUE)
+				content[48] <- gsub(" $", "+", content[48])
+				content <- c(content[1:48],
+		  			"geom_line(data=tibble(p=rep(0, 2), q=c(1, max(vector_limits))), size=1.2, colour=\"deepskyblue4\")", content[49:length(content)])
+			}
+		}
 	}
 
 	# Aladiendo al entorno global la lista de argumentos y la distribucion
 	assign("distribution", distribution, envir=globalenv())
 	assign("list_args", list_args, envir=globalenv())
-
   	content
 }
 ```
@@ -1144,41 +1188,41 @@ density_plot <- filter(d_frame, p != 0) %>%
 	  	axis.text.y=element_blank(), 
 	  	axis.line.y=element_blank(),
 	  	panel.background=element_rect(fill="white")) +
-  	ylab("Densidad") + coord_flip() + xlim(vector_limits)
+  	ylab("Densidad") + coord_flip() + xlim(vector_limits)  
 
-if (rlang::is_call(distribution)) {
-	density_plot <- density_plot +
-	  	geom_bar(stat="identity", width=.1, colour="lightgray") +
-		geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour="deepskyblue4") +
-  		geom_point(size=2.5) +
-  		geom_point(aes(x=0:10, y=rep(0, 11)), shape=21, fill="white", size=2.5)
-} else {
-	if (distribution %in% c("dbinom", "dgeom", "dhyper", "dnbinom", "dpois")) {
-		density_plot <- density_plot +
-		  	geom_bar(stat="identity", width=.1, colour="lightgray") +
-			geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour="deepskyblue4") +
-	  		geom_point(size=2.5) +
-	  		geom_point(
-	  			aes(x=filter(d_frame, p != 0)$q, y=rep(0, length(filter(d_frame, p != 0)$q))), 
-	  			shape=21, fill="white", size=2.5)
-	} else {
-		density_plot <- density_plot +
-			geom_line(size=1.2, colour="deepskyblue4")
+#if (rlang::is_call(distribution)) {
+#	density_plot <- density_plot +
+#	  	geom_bar(stat="identity", width=.1, colour="lightgray") +
+#		geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour="deepskyblue4") +
+#  		geom_point(size=2.5) +
+#  		geom_point(aes(x=0:10, y=rep(0, 11)), shape=21, fill="white", size=2.5)
+#} else {
+#	if (distribution %in% c("dbinom", "dgeom", "dhyper", "dnbinom", "dpois")) {
+#		density_plot <- density_plot +
+##		  	geom_bar(stat="identity", width=.1, colour="lightgray") +
+#			geom_line(data=tibble(p=rep(0, 2), q=vector_limits), size=1.2, colour="deepskyblue4") +
+#	  		geom_point(size=2.5) +
+#	  		geom_point(
+#	  			aes(x=filter(d_frame, p != 0)$q, y=rep(0, length(filter(d_frame, p != 0)$q))), 
+#	  			shape=21, fill="white", size=2.5)
+#	} else {
+#		density_plot <- density_plot +
+#			geom_line(size=1.2, colour="deepskyblue4")
 
-		if(!(distribution %in% c("dnorm", "dt"))) {
-	  		density_plot <- density_plot +
-	  			geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), 
-	  				size=1.2, colour="deepskyblue4") 
-		}
-		if(distribution %in% c("dunif", "dbeta")) {
-			density_plot <- density_plot +
-	  			geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), 
-	  				size=1.2, colour="deepskyblue4") +
-	  			geom_line(data=tibble(p=rep(0, 2), q=c(1, max(vector_limits))), 
-	  				size=1.2, colour="deepskyblue4")
-		}
-	}
-}
+#		if(!(distribution %in% c("dnorm", "dt"))) {
+#	  		density_plot <- density_plot +
+#	  			geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), 
+#	  				size=1.2, colour="deepskyblue4") 
+#		}
+#		if(distribution %in% c("dunif", "dbeta")) {
+#			density_plot <- density_plot +
+#	  			geom_line(data=tibble(p=rep(0, 2), q=c(0, min(vector_limits))), 
+#	  				size=1.2, colour="deepskyblue4") +
+#	  			geom_line(data=tibble(p=rep(0, 2), q=c(1, max(vector_limits))), 
+#	  				size=1.2, colour="deepskyblue4")
+#		}
+#	}
+#}
 
 cowplot::plot_grid(
 	qq_plot + 
@@ -1243,7 +1287,7 @@ Se simula una Distribución de Poisson con parámetro de escala igual a 5, $Pois
 
 En este caso se simula una Distribución uniforme continua entre 0 y 1, $Unif(0, 1)$. 
 
-```{r uniforme-continua, echo=FALSE, eval=TRUE, code=reveal("prob-30", "dunif", list(x=seq(-.5, 1.5, .1), min=0, max=1))}
+```{r uniforme-continua, echo=FALSE, eval=TRUE, code=reveal("prob-30", "dunif", list(x=c(-.5, seq(0, 1, .1)), min=0, max=1))}
 ```
 
 ## Distribución Exponencial.
