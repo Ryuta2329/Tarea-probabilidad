@@ -108,10 +108,10 @@ Entonces, el triangulo es posible formarlo siempre y cuando $l/4 \le \vert x - y
 
 $$
 \begin{align}
-    \frac{l}{4} &\le x - y &\Roghtarrow y &\ge x - \frac{l}{4} \\
-    \frac{l}{4} &\le -(x - y) &\Roghtarrow y &\le x + \frac{l}{4} \\
-    \frac{l}{2} &\ge x - y &\Roghtarrow y &\le x - \frac{l}{2} \\
-    \frac{l}{4} &\le -(x - y) &\Roghtarrow y &\le x + \frac{l}{2} \\
+    \frac{l}{4} &\le x - y &\Rightarrow y &\ge x - \frac{l}{4} \\
+    \frac{l}{4} &\le -(x - y) &\Rightarrow y &\le x + \frac{l}{4} \\
+    \frac{l}{2} &\ge x - y &\Rightarrow y &\le x - \frac{l}{2} \\
+    \frac{l}{4} &\le -(x - y) &\Rightarrow y &\le x + \frac{l}{2} \\
 \end{align}
 $$
 
