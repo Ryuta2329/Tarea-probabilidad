@@ -8,4 +8,4 @@ Las tareas son:
 Los ejercicios son:
 
 * El ejercicio [e01](https://github.com/Ryuta2329/Tarea-probabilidad/blob/main/e01-PE.md) corresponde al de la varilla quebrada para formar un triangulo.
-* El ejercicio [e02]() corresponde a los problemas del capitulo 2.
+* El ejercicio [e02](https://github.com/Ryuta2329/Tarea-probabilidad/blob/main/e02-PE.md) corresponde a los problemas del capitulo 2.

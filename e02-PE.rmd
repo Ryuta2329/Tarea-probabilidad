@@ -55,7 +55,9 @@ $$F(x) = P(X\le x) = \sum_{u\le x} f(u) =
     \end{cases}
 $$
 
-```{tikz, fig.cap = "Funcion de densidad y de distribucion", fig.ext = 'png'}
+De forma que la función de densidad es:
+
+```{tikz, echo=FALSE, fig.cap = "Función de densidad", fig.ext = 'png'}
 \begin{tikzpicture}
     \draw[step=2.5cm,gray,very thin] (0,0) grid (1,1);
     % Ejes
@@ -72,7 +74,11 @@ $$
         \draw[fill=black] (\x,2) circle (0.1);
     }
 \end{tikzpicture}
-%
+```
+
+y la función de distribución es:
+
+```{tikz, echo=FALSE, fig.cap = "Función de distribución", fig.ext = 'png'}
 \begin{tikzpicture}
     \draw[step=2.5cm,gray,very thin] (0,0) grid (1,1);
     % Ejes y Leyendas
@@ -95,7 +101,6 @@ $$
 \end{tikzpicture}
 ```
 
-
 2. **Ejercicio 2.11.** Considere ahora la variable aleatoria continua $X$ con función de densidad:
 
 $$f(x) = 
@@ -109,7 +114,7 @@ Encuentra la función de distribución $F(x)$. Grafica $f(x)$ y $F(x)$.
 
 El valor de $F(x)$ corresponde a la probabilidad acumulada hasta $x$, de tal forma que se puede definir como:
 
-$$F(x) = P(X\le x) = \int_{-\infty}^x f(u)du = 
+$$F(x) = P(X \le x) = \int_{-\infty}^x f(u)du = 
     \begin{cases}
         0 & \text{si } x < -1; \\
         (1-x^2)/2 & \text{si } -1 \le x < 0; \\
@@ -118,45 +123,7 @@ $$F(x) = P(X\le x) = \int_{-\infty}^x f(u)du =
     \end{cases}
 $$
 
-```{r, echo = FALSE, results = "hide"}
-library(exams)
-typ <- match_exams_device()
-
-image01 <- '
-\\begin{tikzpicture}
-    % F(x)
-    \\begin{axis}[axis lines = center, xlabel = $x$, ylabel = {$f(x)$},ymax=1.2,ytick={1},xtick={-1,1}]
-        \\addplot[domain=-1.5:-1, samples=10,color=black, ultra thick]{0};
-        \\addplot[domain=-1:0, samples=10,color=black, ultra thick]{-x};
-        \\addplot[domain=0:1, samples=10,color=black, ultra thick]{x};
-        \\addplot[domain=1:1.5, samples=10,color=black, ultra thick]{0};
-        \\addplot[color=gray!80!white, style=dashed] coordinates{(-1,0)(-1,1)(1,1)(1,0)};
-        \\addplot[fill=white,mark=o] coordinates{(1,0)};
-        \\addplot[fill=white,mark=o] coordinates{(-1,0)};
-   \\end{axis}
-\\end{tikzpicture}
-%
-\\begin{tikzpicture}
-    % F(x)
-    \\begin{axis}[axis lines = center, xlabel = $x$, ylabel = {$F(x)$},ymax=1.2,ytick={1},xtick={-1,1}]
-        \\addplot[domain=-1.5:-1, samples=100,color=black, ultra thick]{0};
-        \\addplot[domain=-1:0, samples=100,color=black, ultra thick]{(1-x^2)/2};
-        \\addplot[domain=0:1, samples=100,color=black, ultra thick]{(1+x^2)/2};
-        \\addplot[domain=1:1.5, samples=100,color=black, ultra thick]{1};
-        \\addplot[color=gray!80!white, style=dashed] coordinates{(1,0)(1,1)};
-        \\addplot[color=gray!80!white, style=dashed] coordinates{(0,1)(1,1)};
-    \\end{axis}
-\\end{tikzpicture}
-'
-```
-
-```{r, echo = FALSE, results = "asis"}
-include_tikz(image01, #name = "grafiko1", 
-    markup ="markdown", format = typ,
-    #library = c("arrows"),
-    packages ="pgfplots",
-    width = "7cm")
-```
+![](./e02-PE_files/figure-html/e02-PE-E2-11-0.png) ![](./e02-PE_files/figure-html/e02-PE-E2-11-1.png)
 
 **Proposición 2.1** Toda función de distribución $F(x)$ satisface las siguientes propiedades:
 

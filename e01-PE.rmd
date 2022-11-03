@@ -35,7 +35,7 @@ Este problema se puede formular como:
 
 _a)_ Una varilla de metal de longitud $l$ se rompe en dos puntos distintos escogidos al azar. ¿Cuál es la probabilidad de que los tres segmentos ası́ obtenidos formen un triángulo?
 
-```{tikz, fig.cap = "Problema del Triangulo", fig.ext = 'png'}
+```{tikz, echo=FALSE, fig.cap = "Problema del Triangulo", fig.ext = 'png'}
 \tikzset{
     cross/.style={path picture={\draw[black]
         (path picture bounding box.south east) -- (path picture bounding box.north west)
@@ -117,7 +117,7 @@ $$
 
 y se puede observar en el gráfico siguiente, que los pares ordenados permitidas son aquellos que caen en el área denotada por los triángulos rectángulos que se forman arriba y debajo de las rectas $y = x - l/4$ y $y= x + l/4$. 
 
-```{tikz, fig.ext = 'png'}
+```{tikz, echo=FALSE, fig.ext = 'png'}
 \begin{tikzpicture}
     \draw[step=2.5cm,gray,very thin] (0,0) grid (10,10);
     \draw[thick,->] (0,0) -- (11,0) node[below, xshift=-25pt]{$l/2$};
