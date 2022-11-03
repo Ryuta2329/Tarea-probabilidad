@@ -1,6 +1,6 @@
 ---
-title: "Ejercicio de Probabilidad y Estadística"
-subtitle: "Ejercicios de Funciones de Distribución."
+title: Ejercicio de Probabilidad y Estadística
+subtitle: Ejercicios de Funciones de Distribución.
 author: Marcelo J. Molinatti
 date: "`r Sys.Date()`"
 output:
@@ -20,16 +20,16 @@ output:
    align: center
 header-includes:
  - \usepackage{amsmath}
- - \ifdefined\HCode\def\pgfsysdriver{pgfsys-dvisvgm4ht.def}\fi
  - \usepackage{tikz}
- - \usepackage{pgfplots}
- - \pgfplotsset{compat=1.16}
 lang: es
 ---
 
 ```{r setup, include=FALSE}
 if (!require(pdftools)) {
     install.packages("pdftools")
+}
+if (!require(cowplot)) {
+    install.packages("cowplot")
 }
 ```
 
@@ -57,48 +57,11 @@ $$
 
 De forma que la función de densidad es:
 
-```{tikz, echo=FALSE, fig.cap = "Función de densidad", fig.ext = 'png'}
-\begin{tikzpicture}
-    \draw[step=2.5cm,gray,very thin] (0,0) grid (1,1);
-    % Ejes
-    \draw[thick,->] (0,0) -- (5,0) node[below, xshift=0pt]{$x$};
-    \draw[thick,->, gray!60!white] (0,0) -- (5,0);
-    \draw[thick] (0,0) -- (0,2) node[anchor=east] {$1/3$};
-    \draw[thick] (0,0) -- (0,4) node[above, xshift=20pt, yshift=-25pt]{$f(x)$};
-    \draw[thick,->, gray!60!white] (0,0) -- (0,4);
-    % f(x)
-    \draw[ultra thick] (0,0) -- (4,0);
-    \foreach \x in {1,...,3}{
-        \draw[fill=white] (\x,0) circle (0.1);
-        \draw[dashed, gray!60!white] (\x,0) -- (\x,2);
-        \draw[fill=black] (\x,2) circle (0.1);
-    }
-\end{tikzpicture}
-```
-
-y la función de distribución es:
-
-```{tikz, echo=FALSE, fig.cap = "Función de distribución", fig.ext = 'png'}
-\begin{tikzpicture}
-    \draw[step=2.5cm,gray,very thin] (0,0) grid (1,1);
-    % Ejes y Leyendas
-    \draw[thick,->] (0,0) -- (4,0) node[below, xshift=0pt]{$x$};
-    \draw[thick,->, gray!60!white] (0,0) -- (4,0);
-    \draw[thick] (0,0) -- (0,3) node[anchor=east] {$1$};
-    \draw[thick] (0,0) -- (0,2) node[anchor=east] {$2/3$};
-    \draw[thick] (0,0) -- (0,1) node[anchor=east] {$1/3$};
-    \draw[thick] (0,0) -- (0,4) node[above, xshift=20pt, yshift=-25pt]{$F(x)$};
-    \draw[thick,->, gray!60!white] (0,0) -- (0,4);
-    % F(x)
-    \draw[ultra thick] (0,0) -- (1,0);
-    \draw[ultra thick] (1,1) -- (2,1);
-    \draw[ultra thick] (2,2) -- (3,2);
-    \draw[ultra thick] (3,3) -- (4,3);
-    \foreach \x in {1,...,3}{
-        \draw[fill=black] (\x,\x) circle (0.1);
-        \draw[fill=white] (\x,\x-1) circle (0.1);
-    }
-\end{tikzpicture}
+```{r distribution-plots-2, echo=FALSE}
+plot_grid(
+    ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-0.png"),
+    ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-1.png"),
+    nrow=1)
 ```
 
 2. **Ejercicio 2.11.** Considere ahora la variable aleatoria continua $X$ con función de densidad:
@@ -123,7 +86,12 @@ $$F(x) = P(X \le x) = \int_{-\infty}^x f(u)du =
     \end{cases}
 $$
 
-![](./e02-PE_files/figure-html/e02-PE-E2-11-0.png) ![](./e02-PE_files/figure-html/e02-PE-E2-11-1.png)
+```{r distribution-plots, echo=FALSE}
+plot_grid(
+    ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-2.png"),
+    ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-3.png"),
+    nrow=1)
+```
 
 **Proposición 2.1** Toda función de distribución $F(x)$ satisface las siguientes propiedades:
 

@@ -1,4 +1,30 @@
-# Ejercicios de Funciones de Distribución.
+---
+title: "Ejercicio de Probabilidad y Estadística"
+subtitle: "Ejercicios de Funciones de Distribución."
+author: Marcelo J. Molinatti
+date: "2022-11-03"
+output:
+ github_document:
+  number_sections: yes
+  html_preview: no
+ html_document:
+  number_sections: yes
+  keep_md: yes
+ pdf_document:
+  keep_tex: yes
+  number_sections: yes
+ rdocx_document:
+  base_format: bookdown::word_document2
+  number_sections: yes
+  plots:
+   align: center
+header-includes:
+ - \usepackage{amsmath}
+ - \usepackage{tikz}
+lang: es
+---
+
+
 
 1. **Ejercicio 2.10**. Considere una variable aleatoria discreta $X$ con función de probabilidad:
 
@@ -22,7 +48,9 @@ $$F(x) = P(X\le x) = \sum_{u\le x} f(u) =
     \end{cases}
 $$
 
-![Función de densidad](e02-PE_files/figure-html/unnamed-chunk-1-1.png) ![Función de distribución](e02-PE_files/figure-html/unnamed-chunk-2-1.png)
+De forma que la función de densidad es:
+
+![](e02-PE_files/figure-html/distribution-plots-2-1.png)<!-- -->
 
 2. **Ejercicio 2.11.** Considere ahora la variable aleatoria continua $X$ con función de densidad:
 
@@ -46,7 +74,7 @@ $$F(x) = P(X \le x) = \int_{-\infty}^x f(u)du =
     \end{cases}
 $$
 
-![](./e02-PE_files/figure-html/e02-PE-E2-11-0.png) ![](./e02-PE_files/figure-html/e02-PE-E2-11-1.png)
+![](e02-PE_files/figure-html/distribution-plots-1.png)<!-- -->
 
 **Proposición 2.1** Toda función de distribución $F(x)$ satisface las siguientes propiedades:
 
