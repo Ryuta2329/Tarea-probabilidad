@@ -1,6 +1,6 @@
 ---
-title: "Tarea de Probabilidades y Estadística: Distribuciones"
-subtitle:
+title: Tarea de Probabilidades y Estadística
+subtitle: Distribuciones
 author: Marcelo J. Molinatti
 date: "`r Sys.Date()`"
 output:

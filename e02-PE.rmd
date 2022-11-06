@@ -57,7 +57,7 @@ $$
 
 De forma que la función de densidad es:
 
-```{r distribution-plots-2, echo=FALSE}
+```{r distribution-plots-2, echo=FALSE, fig.height=4}
 plot_grid(
     ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-0.png"),
     ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-1.png"),
@@ -86,7 +86,7 @@ $$F(x) = P(X \le x) = \int_{-\infty}^x f(u)du =
     \end{cases}
 $$
 
-```{r distribution-plots, echo=FALSE}
+```{r distribution-plots, echo=FALSEm, fig.height=4}
 plot_grid(
     ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-2.png"),
     ggdraw() + draw_image("./e02-PE_files/figure-html/e02-PE-E2-11-3.png"),
@@ -128,3 +128,19 @@ Como un ejemplo del cálculo de probabilidades usando la función de distribuci�
 * $P(X > 0) = 1/3$.
 * $P(0 < X \le 1) = 1/3$
 * $P(X = 0) = 1/3$.
+
+Para la primera probabilidad se tiene:
+
+$$P(X \le 1) = P(X < -1) + P(-1 \le X < 0) + P(0 \le X < 1) = 0 + \frac{1}{3} + \frac{2}{3} = 1$$
+
+Para la siguiente probabilidad se tiene:
+
+$$P(X > 0) = P(X \le 1) - P(X \le 0) = 1 - \frac{2}{3} = \frac{1}{3}$$
+
+Para la tercera probabilidad se tiene:
+
+$$P(0 < X \le 1) = P(X \le 1) - P(X \le 0) = 1 - \frac{2}{3} = \frac{1}{3}$$
+
+y por ultimo:
+
+$$P(X = 0) = P(X \le 0) - P(X < 0) = \frac{2}{3} - \frac{1}{3} = \frac{1}{3}$$
