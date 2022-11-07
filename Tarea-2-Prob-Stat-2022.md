@@ -113,6 +113,19 @@ Los resultados indican que la probabilidad de obtener un valor de $\chi^2$ tan g
 3. Una agencia estatal vigila la calidad del agua para la cría de peces. Esta agencia desea comparar la cantidad media de cierta sustancia tóxica en dos ríos contaminados por desperdicios industriales. Se seleccionaron $11$ muestras en un río y $8$ muestras en el otro. Los resultados de los análisis fueron:
 
 
+| Rio.1| Rio.2|
+|-----:|-----:|
+|    10|    11|
+|    10|     8|
+|    12|     9|
+|    13|     7|
+|     9|    10|
+|     8|     8|
+|    12|     8|
+|    12|    10|
+|    10|      |
+|    14|      |
+|     8|      |
 
 
 Si las dos poblaciones son normales e independientes, ¿puede suponerse que la cantidad media de sustancia tóxica presente en ambos ríos es la misma? Considerar un nivel de significación del $5$%.
@@ -190,6 +203,14 @@ Los resultados indican que para un $\alpha=0{,}05$, se rechaza la hipótesis nul
 4. Una empresa farmacéutica está interesada en la investigación preliminar de un nuevo medicamento que parece tener propiedades reductoras del colesterol en la sangre. A tal fin se toma una muestra al azar de $6$ personas, y se determina el contenido en colesterol antes y después del tratamiento. Los resultados han sido los siguientes:
 
 
+| Antes| Despues|
+|-----:|-------:|
+|   217|     209|
+|   252|     241|
+|   229|     230|
+|   200|     208|
+|   209|     206|
+|   213|     211|
 
  Comprobar, a un nivel de significación del $4$% si la aplicación del medicamento es efectiva. Es decir, comprobar si el nivel medio de colesterol en sangre de los pacientes antes de la aplicación del medicamento es mayor o igual al nivel medio de colesterol en sangre después del tratamiento.
 
@@ -399,6 +420,20 @@ Los resultados muestran que la diferencia sigue siendo negativa y significativa 
 2. Se quieren comparar dos poblaciones de ranas pipiens aisladas geográficamente. Para ello se toman dos muestras de ambas poblaciones de tamaño $12$ y $10$ y se les mide la longitud del cuerpo expresado en milímetros.
 
 
+| Poblacion.1| Poblacion.2|
+|-----------:|-----------:|
+|        20.1|        25.3|
+|        22.5|        31.2|
+|        22.2|        22.4|
+|        30.2|        23.1|
+|        22.8|        26.4|
+|        22.1|        28.2|
+|        21.2|        21.3|
+|        21.4|        31.1|
+|        20.7|        26.2|
+|        24.9|        21.4|
+|        23.9|            |
+|        23.3|            |
  
  Contrastar la hipótesis de igualdad de medias a un nivel de significancia del $5$%. (Suponiendo que la longitud se distribuye normalmente).
 
@@ -474,6 +509,18 @@ Los resultados indican que para un $\alpha=0{,}05$, se debe mantener la hipótes
 3. Se realiza un estudio, en el que participan $10$ individuos, para investigar el efecto del ejercicio físico en el nivel de colesterol en plasma. Antes del ejercicio se tomaron muestras de sangre para determinar el nivel de colesterol de cada individuo. Después, los participantes fueron sometidos a un programa de ejercicios. Al final de los ejercicios se tomaron nuevamente muestras de sangre y se obtuvo una segunda lectura del nivel de colesterol. Los resultados se muestran a continuación.
 
 
+| Antes| Despues|
+|-----:|-------:|
+|   182|     190|
+|   230|     220|
+|   160|     166|
+|   200|     150|
+|   160|     140|
+|   240|     220|
+|   260|     156|
+|   480|     312|
+|   263|     240|
+|   240|     250|
 
  Se quiere saber si el ejercicio físico ha reducido el nivel de colesterol para un nivel de confianza del 95%.
 
