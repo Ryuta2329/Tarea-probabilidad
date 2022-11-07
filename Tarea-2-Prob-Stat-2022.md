@@ -1,6 +1,5 @@
 # Contraste de Hipotesis
 
-
 ## Ejercicios Guiados.
 
 1. Un fabricante diseña un experimento para estimar si la tensión de ruptura media de una fibra es $20$. Para ello, observa las tensiones de ruptura, en libras, de $16$ hilos de dicha fibra seleccionados aleatoriamente.
@@ -20,8 +19,8 @@ Este ejercicio se trata de comparar la media calculada a partir de una muestra a
 
 $$
 \begin{align}
-    H_0: &\mu = 20; \\
-    H_1: &\mu \ne 20;
+    H_0\text{: }&\mu = 20; \\
+    H_1\text{: }&\mu \ne 20;
 \end{align}
 $$
 
@@ -48,10 +47,6 @@ cat("CI95%: (", mean(tension_data) - qnorm(.95) * .45 / sqrt(16), ", ", mean(ten
 ## CI95%: (20.1962, 20.5663)
 ```
 
-```r
-# Density plot maybe?
-```
-
 Se tiene que el valor calculado del estadístico $Z$ es mayor a tres desviaciones estándar con una probabilidad muy pequeña, menor a $\alpha = 0{,}05$. Por lo tanto, se rechaza la hipótesis nula y se concluye que la tensión de ruptura de la fibra es diferente del valor teórico de $20$.
 
 En el inciso _b)_, se indica que la varianza es desconocida, por lo que se puede aplicar una prueba $t$-Student (el uso de una distribución para el estadístico con colas mas pesadas permite tomar en cuenta la incertidumbre añadida debido al desconocimiento de la varianza). Los resultados de la prueba son:
@@ -59,6 +54,21 @@ En el inciso _b)_, se indica que la varianza es desconocida, por lo que se puede
 
 ```r
 t_test_res <- t.test(tension_data, alternative="two.sided", mu=20)
+t_test_res
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  tension_data
+## t = 2.9154, df = 15, p-value = 0.01066
+## alternative hypothesis: true mean is not equal to 20
+## 95 percent confidence interval:
+##  20.10251 20.65999
+## sample estimates:
+## mean of x 
+##  20.38125
 ```
 
 Se observa que la hipótesis nula sigue siendo rechazada, dado que $p =$ 0.0106574 es menor al valor de $\alpha = 0{,}05$. Se nota además, que el intervalo de confianza para la media es mas amplio, pero al igual que antes, no incluye el $20$. 
@@ -69,8 +79,8 @@ Si $p$ es la proporción de alumnos conformes con las calificaciones, se busca c
 
 $$
 \begin{align}
-    H_0: & p \ge 0{,}5; \\
-    H_1: & p < 0{,}5;
+    H_0\text{: }& p \ge 0{,}5; \\
+    H_1\text{: }& p < 0{,}5;
 \end{align}
 $$
 
@@ -102,8 +112,10 @@ Los resultados indican que la probabilidad de obtener un valor de $\chi^2$ tan g
 
 3. Una agencia estatal vigila la calidad del agua para la cría de peces. Esta agencia desea comparar la cantidad media de cierta sustancia tóxica en dos ríos contaminados por desperdicios industriales. Se seleccionaron $11$ muestras en un río y $8$ muestras en el otro. Los resultados de los análisis fueron:
 
-**Río 1** | 10, 10, 12, 13,  9, 8, 12, 12, 10, 14, 8 |
-**Río 2** | 11, 8,   9,  7, 10, 8,  8, 10            |
+|---------:|------------------------------------------|
+|**Río 1** | 10, 10, 12, 13,  9, 8, 12, 12, 10, 14, 8 |
+|**Río 2** | 11, 8,   9,  7, 10, 8,  8, 10            |
+|----------|------------------------------------------|
 
 Si las dos poblaciones son normales e independientes, ¿puede suponerse que la cantidad media de sustancia tóxica presente en ambos ríos es la misma? Considerar un nivel de significación del $5$%.
 
@@ -117,8 +129,8 @@ De nuevo se supone que ambas poblaciones provienen de una distribución normal, 
 
 $$
 \begin{align}
-    H_0: &\mu_1 - \mu_2 = 0; \\
-    H_1: &\mu_1 - \mu_2 \ne 0;
+    H_0\text{: }&\mu_1 - \mu_2 = 0; \\
+    H_1\text{: }&\mu_1 - \mu_2 \ne 0;
 \end{align}
 $$
 
@@ -128,8 +140,8 @@ Para ello, es necesario primero comprobar si las varianzas son iguales o no, uti
 
 $$
 \begin{align}
-    H_0: &\sigma_1 = \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} = 1;\\
-    H_1: &\sigma_1 \ne \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} \ne 1
+    H_0\text{: }&\sigma_1 = \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} = 1;\\
+    H_1\text{: }&\sigma_1 \ne \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} \ne 1
 \end{align}
 $$
 
@@ -179,10 +191,10 @@ Los resultados indican que para un $\alpha=0{,}05$, se rechaza la hipótesis nul
 
 4. Una empresa farmacéutica está interesada en la investigación preliminar de un nuevo medicamento que parece tener propiedades reductoras del colesterol en la sangre. A tal fin se toma una muestra al azar de $6$ personas, y se determina el contenido en colesterol antes y después del tratamiento. Los resultados han sido los siguientes:
 
-:-----------|:-----------------------------
-**Antes**   | 217, 252, 229, 200, 209, 213 
-**Después** | 209, 241, 230, 208, 206, 211 
-------------|------------------------------
+|:-----------|:-----------------------------|
+|**Antes**   | 217, 252, 229, 200, 209, 213 |
+|**Después** | 209, 241, 230, 208, 206, 211 |
+|------------|------------------------------|
 
  Comprobar, a un nivel de significación del $4$% si la aplicación del medicamento es efectiva. Es decir, comprobar si el nivel medio de colesterol en sangre de los pacientes antes de la aplicación del medicamento es mayor o igual al nivel medio de colesterol en sangre después del tratamiento.
 
@@ -196,8 +208,8 @@ Se trata de dos muestras relacionadas dado que las medidas se hacen sobre los mi
 
 $$
 \begin{align}
-    H_0: &\mu_{antes} - \mu_{despues} \le 0; \\
-    H_1: &\mu_{antes} - \mu_{despues} > 0
+    H_0\text{: }&\mu_{antes} - \mu_{despues} \le 0; \\
+    H_1\text{: }&\mu_{antes} - \mu_{despues} > 0
 \end{align}
 $$
 
@@ -205,8 +217,8 @@ Se realiza una prueba $t$-Student para muestras pareadas, con un nivel de signif
 
 $$
 \begin{align}
-    H_0: &\sigma_1 = \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} = 1;\\
-    H_1: &\sigma_1 \ne \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} \ne 1
+    H_0\text{: }&\sigma_1 = \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} = 1;\\
+    H_1\text{: }&\sigma_1 \ne \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} \ne 1
 \end{align}
 $$
 
@@ -262,8 +274,8 @@ Se busca saber si la proporción de jóvenes, $p_{Jovenes}$ a los cuales les gus
 
 $$
 \begin{align}
-    H_0: & p_{Jovenes} - p_{Adultos} = 0; \\
-    H_1: & p_{Jovenes} - p_{Adultos} \ne 0;
+    H_0\text{: }& p_{Jovenes} - p_{Adultos} = 0; \\
+    H_1\text{: }& p_{Jovenes} - p_{Adultos} \ne 0;
 \end{align}
 $$
 
@@ -291,7 +303,7 @@ prop.test(n, N, alternative="two.sided", conf.level=0.99)
 ##   0.50   0.25
 ```
 
-Los resultados de la prueba muestran que para el nivel de significancia escogido, la diferencia de proporciones de $0{,}25$ es significativamente distinta de cero, lo cual permite concluir con un 99% de confianza que la proporción de jóvenes a los que les gusto el producto ($p_{Jovenes} = 0{,}5$) es mayor que la proporción de adultos ($p_{Adultos} = 0{,}25$).
+Los resultados de la prueba muestran que para el nivel de significancia escogido, la diferencia de proporciones de $0{,}25$ es significativamente distinta de cero, lo cual permite concluir con un $99$% de confianza que la proporción de jóvenes a los que les gusto el producto ($p_{Jovenes} = 0{,}5$) es mayor que la proporción de adultos ($p_{Adultos} = 0{,}25$).
 
 ## Ejercicios Propuestos
 
@@ -329,8 +341,8 @@ Para el contraste de hipótesis, sea $\mu$ el tiempo medio que tarda en alcanzar
 
 $$
 \begin{align}
-    H_0: &\mu \ge 15; \\
-    H_1: &\mu < 15;
+    H_0\text{: }&\mu \ge 15; \\
+    H_1\text{: }&\mu < 15;
 \end{align}
 $$
 
@@ -361,8 +373,8 @@ Para el segundo contraste, se busca saber si este tiempo es menor a 13 minutos, 
 
 $$
 \begin{align}
-    H_0: &\mu \ge 13; \\
-    H_1: &\mu < 13
+    H_0\text{: }&\mu \ge 13; \\
+    H_1\text{: }&\mu < 13
 \end{align}
 $$
 
@@ -391,10 +403,10 @@ Los resultados muestran que la diferencia sigue siendo negativa y significativa 
 
 2. Se quieren comparar dos poblaciones de ranas pipiens aisladas geográficamente. Para ello se toman dos muestras de ambas poblaciones de tamaño $12$ y $10$ y se les mide la longitud del cuerpo expresado en milímetros.
 
------------:|:-------------------------------------------------------------------------
-Población 1:| $20{,}1$; $22{,}5$; $22{,}2$; $30{,}2$; $22{,}8$; $22{,}1$; $21{,}2$; $21{,}4$; $20{,}7$; $24{,}9$; $23{,}9$; $23{,}3$
-Población 2:| $25{,}3$; $31{,}2$; $22{,}4$; $23{,}1$; $26{,}4$; $28{,}2$; $21{,}3$; $31{,}1$; $26{,}2$; $21{,}4$
-------------|--------------------------------------------------------------------------
+|-----------:|:-------------------------------------------------------------------------|
+|**Población 1:**| $20{,}1$; $22{,}5$; $22{,}2$; $30{,}2$; $22{,}8$; $22{,}1$; $21{,}2$; $21{,}4$; $20{,}7$; $24{,}9$; $23{,}9$; $23{,}3$|
+|**Población 2:**| $25{,}3$; $31{,}2$; $22{,}4$; $23{,}1$; $26{,}4$; $28{,}2$; $21{,}3$; $31{,}1$; $26{,}2$; $21{,}4$|
+|------------|--------------------------------------------------------------------------|
 
   Contrastar la hipótesis de igualdad de medias a un nivel de significancia del $5$%. (Suponiendo que la longitud se distribuye normalmente).
 
@@ -409,8 +421,8 @@ Se busca saber si la longitud del cuerpo promedio de las ranas de la primera pob
 
 $$
 \begin{align}
-    H_0: &\mu_1 - \mu_2 = 0; \\
-    H_1: &\mu_1 - \mu_2 \ne 0;
+    H_0\text{: }&\mu_1 - \mu_2 = 0; \\
+    H_1\text{: }&\mu_1 - \mu_2 \ne 0;
 \end{align}
 $$
 
@@ -418,8 +430,8 @@ Para contrastar estas hipótesis se hace uso de una prueba $t$-Student para comp
 
 $$
 \begin{align}
-    H_0: &\sigma_1 = \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} = 1;\\
-    H_1: &\sigma_1 \ne \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} \ne 1
+    H_0\text{: }&\sigma_1 = \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} = 1;\\
+    H_1\text{: }&\sigma_1 \ne \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} \ne 1
 \end{align}
 $$
 
@@ -469,10 +481,10 @@ Los resultados indican que para un $\alpha=0{,}05$, se debe mantener la hipótes
 
 3. Se realiza un estudio, en el que participan $10$ individuos, para investigar el efecto del ejercicio físico en el nivel de colesterol en plasma. Antes del ejercicio se tomaron muestras de sangre para determinar el nivel de colesterol de cada individuo. Después, los participantes fueron sometidos a un programa de ejercicios. Al final de los ejercicios se tomaron nuevamente muestras de sangre y se obtuvo una segunda lectura del nivel de colesterol. Los resultados se muestran a continuación.
 
---------------------:|:-------------------------------------------------
-**Nivel previo:**    | 182; 230; 160; 200; 160; 240; 260; 480; 263; 240
-**Nivel posterior:** | 190; 220; 166; 150; 140; 220; 156; 312; 240; 250
----------------------|--------------------------------------------------
+|--------------------:|:-------------------------------------------------|
+|**Nivel previo:**    | 182; 230; 160; 200; 160; 240; 260; 480; 263; 240 |
+|**Nivel posterior:** | 190; 220; 166; 150; 140; 220; 156; 312; 240; 250 |
+|---------------------|--------------------------------------------------|
 
  Se quiere saber si el ejercicio físico ha reducido el nivel de colesterol para un nivel de confianza del 95%.
 
@@ -487,8 +499,8 @@ Se trata de dos muestras relacionadas dado que las medidas se hacen sobre los mi
 
 $$
 \begin{align}
-    H_0: &\mu_{antes} - \mu_{despues} \le 0; \\
-    H_1: &\mu_{antes} - \mu_{despues} > 0
+    H_0\text{: }&\mu_{antes} - \mu_{despues} \le 0; \\
+    H_1\text{: }&\mu_{antes} - \mu_{despues} > 0
 \end{align}
 $$
 
@@ -496,8 +508,8 @@ Se realiza una prueba $t$-Student para muestras pareadas, con un nivel de signif
 
 $$
 \begin{align}
-    H_0: &\sigma_1 = \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} = 1;\\
-    H_1: &\sigma_1 \ne \sigma_2 \Rightaarrow \frac{\sigma_1}{\sigma_2} \ne 1
+    H_0\text{: }&\sigma_1 = \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} = 1;\\
+    H_1\text{: }&\sigma_1 \ne \sigma_2 \Rightarrow \frac{\sigma_1}{\sigma_2} \ne 1
 \end{align}
 $$
 
@@ -553,8 +565,8 @@ Si $p$ es la proporción de familias numerosas, se busca contrastar las siguient
 
 $$
 \begin{align}
-    H_0: & p = 0{,}2; \\
-    H_1: & p \ne 0{,}2;
+    H_0\text{: }& p = 0{,}2; \\
+    H_1\text{: }& p \ne 0{,}2;
 \end{align}
 $$
 
@@ -591,8 +603,8 @@ Se busca saber si la proporción de individuos curados por el tratamiento A, $p_
 
 $$
 \begin{align}
-    H_0: & p_{A} - p_{control} \le 0; \\
-    H_1: & p_{A} - p_{control} > 0;
+    H_0\text{: }& p_{A} - p_{control} \le 0; \\
+    H_1\text{: }& p_{A} - p_{control} > 0;
 \end{align}
 $$
 
@@ -674,8 +686,8 @@ Para saber si la distribución de la longitud de las hojas sigue una distribuci�
 
 $$
 \begin{align}
-    H_0: & F(x) = \Phi(x) \\
-    H_1: & F(x) \ne \Phi(x)
+    H_0\text{: }& F(x) = \Phi(x) \\
+    H_1\text{: }& F(x) \ne \Phi(x)
 \end{align}
 $$
 
