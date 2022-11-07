@@ -112,10 +112,8 @@ Los resultados indican que la probabilidad de obtener un valor de $\chi^2$ tan g
 
 3. Una agencia estatal vigila la calidad del agua para la cría de peces. Esta agencia desea comparar la cantidad media de cierta sustancia tóxica en dos ríos contaminados por desperdicios industriales. Se seleccionaron $11$ muestras en un río y $8$ muestras en el otro. Los resultados de los análisis fueron:
 
-|---------:|------------------------------------------|
-|**Río 1** | 10, 10, 12, 13,  9, 8, 12, 12, 10, 14, 8 |
-|**Río 2** | 11, 8,   9,  7, 10, 8,  8, 10            |
-|----------|------------------------------------------|
+
+
 
 Si las dos poblaciones son normales e independientes, ¿puede suponerse que la cantidad media de sustancia tóxica presente en ambos ríos es la misma? Considerar un nivel de significación del $5$%.
 
@@ -191,10 +189,7 @@ Los resultados indican que para un $\alpha=0{,}05$, se rechaza la hipótesis nul
 
 4. Una empresa farmacéutica está interesada en la investigación preliminar de un nuevo medicamento que parece tener propiedades reductoras del colesterol en la sangre. A tal fin se toma una muestra al azar de $6$ personas, y se determina el contenido en colesterol antes y después del tratamiento. Los resultados han sido los siguientes:
 
-|:-----------|:-----------------------------|
-|**Antes**   | 217, 252, 229, 200, 209, 213 |
-|**Después** | 209, 241, 230, 208, 206, 211 |
-|------------|------------------------------|
+
 
  Comprobar, a un nivel de significación del $4$% si la aplicación del medicamento es efectiva. Es decir, comprobar si el nivel medio de colesterol en sangre de los pacientes antes de la aplicación del medicamento es mayor o igual al nivel medio de colesterol en sangre después del tratamiento.
 
@@ -403,12 +398,9 @@ Los resultados muestran que la diferencia sigue siendo negativa y significativa 
 
 2. Se quieren comparar dos poblaciones de ranas pipiens aisladas geográficamente. Para ello se toman dos muestras de ambas poblaciones de tamaño $12$ y $10$ y se les mide la longitud del cuerpo expresado en milímetros.
 
-|-----------:|:-------------------------------------------------------------------------|
-|**Población 1:**| $20{,}1$; $22{,}5$; $22{,}2$; $30{,}2$; $22{,}8$; $22{,}1$; $21{,}2$; $21{,}4$; $20{,}7$; $24{,}9$; $23{,}9$; $23{,}3$|
-|**Población 2:**| $25{,}3$; $31{,}2$; $22{,}4$; $23{,}1$; $26{,}4$; $28{,}2$; $21{,}3$; $31{,}1$; $26{,}2$; $21{,}4$|
-|------------|--------------------------------------------------------------------------|
 
-  Contrastar la hipótesis de igualdad de medias a un nivel de significancia del $5$%. (Suponiendo que la longitud se distribuye normalmente).
+ 
+ Contrastar la hipótesis de igualdad de medias a un nivel de significancia del $5$%. (Suponiendo que la longitud se distribuye normalmente).
 
 
 ```r
@@ -481,10 +473,7 @@ Los resultados indican que para un $\alpha=0{,}05$, se debe mantener la hipótes
 
 3. Se realiza un estudio, en el que participan $10$ individuos, para investigar el efecto del ejercicio físico en el nivel de colesterol en plasma. Antes del ejercicio se tomaron muestras de sangre para determinar el nivel de colesterol de cada individuo. Después, los participantes fueron sometidos a un programa de ejercicios. Al final de los ejercicios se tomaron nuevamente muestras de sangre y se obtuvo una segunda lectura del nivel de colesterol. Los resultados se muestran a continuación.
 
-|--------------------:|:-------------------------------------------------|
-|**Nivel previo:**    | 182; 230; 160; 200; 160; 240; 260; 480; 263; 240 |
-|**Nivel posterior:** | 190; 220; 166; 150; 140; 220; 156; 312; 240; 250 |
-|---------------------|--------------------------------------------------|
+
 
  Se quiere saber si el ejercicio físico ha reducido el nivel de colesterol para un nivel de confianza del 95%.
 
@@ -691,8 +680,165 @@ $$
 \end{align}
 $$
 
+El contraste se hace con un nivel de significancia de $\alpha = 0{,}05$, y los resultados son los siguientes:
+
 
 ```r
-#shapiro.test()
+shapiro.test(tree_data$Longitud)
 ```
 
+```
+## 
+## 	Shapiro-Wilk normality test
+## 
+## data:  tree_data$Longitud
+## W = 0.92244, p-value = 0.2098
+```
+
+Se observa que la hipótesis nula se puede mantener con un nivel de confianza del 95% dado que la probabilidad asociada al estadístico calculado es mayor al $\alpha$ especificado. Para verificar estos resultados se puede observar un _q-q plot_:
+
+
+```r
+library(ggplot2, quietly=TRUE)
+
+qq_plot <- ggplot(tree_data, aes(sample=Longitud)) +
+  stat_qq_line(colour = "deepskyblue4", size=1.5) + 
+  stat_qq() + 
+  theme_light(base_size=10) +
+  xlab("Distribución teórica (Normal estandar)") + 
+  theme(panel.grid=element_blank())
+```
+
+El gráfico muestra que dentro de $\pm 1$ desviación estándar, la distribución se ajusta bien a una normal, pero mas allá de eso, los puntos se desvían mas de esta distribución teórica.
+
+Ahora, suponiendo que el supuesto de normalidad es posible mantenerlo (basándonos en los resultados de la prueba), podemos contrastar las siguientes hipótesis sobre la longitud media de las hojas:
+
+$$
+\begin{align}
+    H_0\text{: }&\mu = 30; \\
+    H_1\text{: }&\mu \ne 30;
+\end{align}
+$$
+
+En este caso, no se especifica ninguna tendencia natural a que la tensión de ruptura sea mayor o menor a este valor por lo que se usa un contraste bilateral. Dado que la varianza es desconocida, se puede aplicar una prueba $t$-Student. Los resultados de la prueba son:
+
+
+```r
+t_test_res <- t.test(tree_data$Longitud, alternative="two.sided", mu=30)
+t_test_res
+```
+
+```
+## 
+## 	One Sample t-test
+## 
+## data:  tree_data$Longitud
+## t = -0.65528, df = 14, p-value = 0.5229
+## alternative hypothesis: true mean is not equal to 30
+## 95 percent confidence interval:
+##  27.06296 31.56238
+## sample estimates:
+## mean of x 
+##  29.31267
+```
+
+Dado que $p =$ 0.5229116 es mayor al valor de $\alpha = 0{,}05$, por lo que se debe mantener la hipotesis nula, y se concluye con un nivel de confianza del 95%, que la longitud promedio de las hojas es 30 cm.
+
+Ahora, se supone que ambas poblaciones de _Canopy_ y _Sprouts_ provienen de una distribución normal, ambas independientes, donde $n_{Canoopy}=$ `12` y $n_{Sprouts}=$ `3`. En este caso se busca evaluar si la diferencia en asimetría de las hojas de ambas partes de hojas presente en los arboles es la misma o no. Se tienen las hipótesis:
+
+$$
+\begin{align}
+    H_0\text{: }&\mu_{Canopy} - \mu_{Sprouts} = 0; \\
+    H_1\text{: }&\mu_{Canopy} - \mu_{Sprouts} \ne 0;
+\end{align}
+$$
+
+El contraste es bilateral dado que no se dispone de información _a priori_ sobre la simetría de las hojas en ambas partes de los arboles. 
+Se aplica una prueba $t$-Student para verificar si la diferencia de medias de $\bar{X_{Canopy}} - \bar{X_{Sprouts}} =$ -0.051 es significativamente distinta de cero o no. 
+Para ello, es necesario primero comprobar si las varianzas son iguales o no, utilizando la prueba $F$ para contrastar las hipótesis:
+
+$$
+\begin{align}
+    H_0\text{: }&\sigma_{Canopy} = \sigma_{Sprouts} \Rightarrow \frac{\sigma_{Canopy}}{\sigma_{Sprouts}} = 1;\\
+    H_1\text{: }&\sigma_{Canopy} \ne \sigma_{Sprouts} \Rightarrow \frac{\sigma_{Canopy}}{\sigma_{Sprouts}} \ne 1
+\end{align}
+$$
+
+La prueba se lleva a cabo con un nivel de significancia de $0{,}1$ para poder mantener el nivel de significancia del contraste de medias en $\alpha=0{,}05$. 
+
+
+```r
+var.test(
+    tree_data$Asimetria[tree_data$Parte == "Canopy"], 
+    tree_data$Asimetria[tree_data$Parte == "Sprouts"], 
+    ratio=1, "two.sided", conf.level=0.90)
+```
+
+```
+## 
+## 	F test to compare two variances
+## 
+## data:  tree_data$Asimetria[tree_data$Parte == "Canopy"] and tree_data$Asimetria[tree_data$Parte == "Sprouts"]
+## F = 3.4611, num df = 11, denom df = 2, p-value = 0.4908
+## alternative hypothesis: true ratio of variances is not equal to 1
+## 90 percent confidence interval:
+##   0.1783607 13.7830583
+## sample estimates:
+## ratio of variances 
+##           3.461082
+```
+
+Los resultados muestran que, para un nivel de significancia de $0{,}1$, se puede mantener la hipótesis de varianzas iguales. Por lo tanto, el contraste de medias se puede realizar bajo este supuesto. Los resultados son:
+
+
+```r
+t.test(
+    tree_data$Asimetria[tree_data$Parte == "Canopy"], 
+    tree_data$Asimetria[tree_data$Parte == "Sprouts"], 
+    "two.sided", var.equal=TRUE)
+```
+
+```
+## 
+## 	Two Sample t-test
+## 
+## data:  tree_data$Asimetria[tree_data$Parte == "Canopy"] and tree_data$Asimetria[tree_data$Parte == "Sprouts"]
+## t = -0.88477, df = 13, p-value = 0.3924
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.1755285  0.0735285
+## sample estimates:
+## mean of x mean of y 
+##     0.084     0.135
+```
+
+Los resultados indican que para un $\alpha=0{,}05$, se mantiene la hipótesis nula, y se concluye que la asimetría de las hojas es la misma, con un 95% de confianza. 
+
+Ahora, para la regresión lineal entre la asimetría de las hojas y la longitud de la hoja se procede de la siguiente forma:
+
+
+```r
+mod <- lm(Asimetria ~ Longitud, tree_data)
+summary(mod)
+```
+
+```
+## 
+## Call:
+## lm(formula = Asimetria ~ Longitud, data = tree_data)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.087912 -0.072795 -0.009889  0.048489  0.247311 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(>|t|)
+## (Intercept)  0.119847   0.178754   0.670    0.514
+## Longitud    -0.000875   0.006044  -0.145    0.887
+## 
+## Residual standard error: 0.09187 on 13 degrees of freedom
+## Multiple R-squared:  0.001609,	Adjusted R-squared:  -0.07519 
+## F-statistic: 0.02096 on 1 and 13 DF,  p-value: 0.8871
+```
+
+Los resultados muestran que las variables Asimetría y Longitud no muestran una relación lineal dado que el valor de la prueba $F=0{,}01106$ para análisis de varianza arroja un valor de probabilidad de $p=0{,}9178$, el cual no es significativo para $\alpha=0{,}05$. De igual forma, los coeficiente estimados no son significativos para un valor de significancia igual al anterior, indicando que la pendiente y el intercepto no son diferentes de cero. El $R^2=0{,}00085$ muestra que apenas el $0{,}085$% de la varianza es explicada por el modelo, lo cual no representa ni el 1% de la varianza total, lo cual es un indicativo de la falta de asociación de las variables. 
